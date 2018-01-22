@@ -1,0 +1,7 @@
+Deployment to Heroku:
+
+1. Build app with: ng build
+2. copy content of dist to GradeCalculator/php-host-test/production/web
+3. rename index.html to index.php
+4. git add * git commit -m "blag"
+5. git push heroku master
