@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {Course} from '../course';
-import { CourseSummaryComponent }      from '/course-summary/course-summary.component';
+import {Account} from '../Account';
+import { CourseSummaryComponent } from './course-summary/course-summary.component';
+
+import { AccountDataService } from '../account-data.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,17 +11,17 @@ import { CourseSummaryComponent }      from '/course-summary/course-summary.comp
 })
 export class DashboardComponent implements OnInit {
 
-  course: Course = {
-    id: 4;
-    title: 'first';
-    currentPercent: 0.72;
-    currentGrade: 'High Distinction';
-    percentMarked: 0.5;
-  };
+  account: Account;
 
-  constructor() { }
+  constructor(private accountData: AccountDataService) { }
 
   ngOnInit() {
+    this.getAccount();
+  }
+
+  getAccount(): void {
+    this.accountData.getAccount()
+        .subscribe(account => this.account = account);
   }
 
 }

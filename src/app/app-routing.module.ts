@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'course/:title', component: CourseComponent },
   { path: 'setup', component: SetupComponent },
   { path: 'account', component: AccountComponent },
-  { path: 'support', component: SupportComponent }
+  { path: 'support', component: SupportComponent },
   { path: 'landing', component: LandingComponent }
 
 

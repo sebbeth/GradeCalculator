@@ -11,7 +11,8 @@ import { SetupComponent } from './setup/setup.component';
 import { AccountComponent } from './account/account.component';
 import { SupportComponent } from './support/support.component';
 import { LandingComponent } from './landing/landing.component';
-import { CourseSummaryComponent } from './course-summary/course-summary.component';
+import { CourseSummaryComponent } from './dashboard/course-summary/course-summary.component';
+import { AccountDataService } from './account-data.service';
 
 
 @NgModule({
@@ -30,7 +31,7 @@ import { CourseSummaryComponent } from './course-summary/course-summary.componen
     AppRoutingModule,
     NgbModule.forRoot()
   ],
-  providers: [],
+  providers: [AccountDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
