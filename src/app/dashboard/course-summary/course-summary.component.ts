@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {Course} from '../course';
-import { CourseSummaryComponent }      from '/course-summary/course-summary.component';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  selector: 'app-course-summary',
+  templateUrl: './course-summary.component.html',
+  styleUrls: ['./course-summary.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class CourseSummaryComponent implements OnInit {
 
   course: Course = {
     id: 4;
@@ -16,6 +15,7 @@ export class DashboardComponent implements OnInit {
     currentGrade: 'High Distinction';
     percentMarked: 0.5;
   };
+
 
   constructor() { }
 

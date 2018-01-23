@@ -6,6 +6,7 @@ import { CourseComponent }      from './course/course.component';
 import { AccountComponent }      from './account/account.component';
 import { SetupComponent }      from './setup/setup.component';
 import { SupportComponent }      from './support/support.component';
+import { LandingComponent }      from './landing/landing.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'setup', component: SetupComponent },
   { path: 'account', component: AccountComponent },
   { path: 'support', component: SupportComponent }
+  { path: 'landing', component: LandingComponent }
 
 
 

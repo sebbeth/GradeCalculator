@@ -10,6 +10,8 @@ import { CourseComponent } from './course/course.component';
 import { SetupComponent } from './setup/setup.component';
 import { AccountComponent } from './account/account.component';
 import { SupportComponent } from './support/support.component';
+import { LandingComponent } from './landing/landing.component';
+import { CourseSummaryComponent } from './course-summary/course-summary.component';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import { SupportComponent } from './support/support.component';
     CourseComponent,
     SetupComponent,
     AccountComponent,
-    SupportComponent
+    SupportComponent,
+    LandingComponent,
+    CourseSummaryComponent
   ],
   imports: [
     BrowserModule,
