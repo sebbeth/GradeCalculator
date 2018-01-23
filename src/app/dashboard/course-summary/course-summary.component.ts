@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import {Account} from '../../account';
+import {Course} from '../../course';
 
 @Component({
   selector: 'app-course-summary',
@@ -7,14 +9,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CourseSummaryComponent implements OnInit {
 
-  /*course: Course = {
-    id: 4;
-    title: 'first';
-    currentPercent: 0.72;
-    currentGrade: 'High Distinction';
-    percentMarked: 0.5;
-  }; */
-
+  @Input()
+  course: Course;
 
   constructor() { }
 
