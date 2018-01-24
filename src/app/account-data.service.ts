@@ -4,12 +4,38 @@ import { of } from 'rxjs/observable/of';
 
 import {Course} from './course';
 import {Account} from './account';
+import {CourseItem} from './course-item';
+
+
+/*
+
+This class is the data source for account data.
+
+*/
 
 @Injectable()
 export class AccountDataService {
 
-  course1: Course = {id:3, title: 'SENG2050',currentPercent: 0.6,currentGrade: 'credit', percentMarked:0.7};
-  course2: Course = {id:3, title: 'COMP2050',currentPercent: 0.6,currentGrade: 'High Destinction', percentMarked:0.7};
+
+  a: CourseItem = {
+    title: 'Assignment 1',
+    weighting: 20,
+    possibleMark: 100,
+    minimumMark: 0,
+    neededMark: 40,
+    markRecieved: 50
+  };
+  b: CourseItem = {
+    title: 'Final Exam',
+    weighting: 60,
+    possibleMark: 100,
+    minimumMark: 40,
+    neededMark: 40,
+    markRecieved: 80
+  };
+
+  course1: Course = {id:1, title: 'SENG2050',currentPercent: 80,currentGrade: 'Distinction', percentMarked:70, courseItems:[this.a,this.b]};
+  course2: Course = {id:2, title: 'COMP2050',currentPercent: 65,currentGrade: 'High Distinction', percentMarked:40,courseItems:null};
 
 
   account: Account = {
@@ -32,6 +58,16 @@ export class AccountDataService {
   getCourses(): Observable<Course[]> {
 
     return of(this.account.courses);
+  }
+
+  getCourseAtIndex(index): Observable<Course> {
+
+    return of(this.account.courses[index]);
+  }
+
+  getCourseAtIndexItems(index):Observable<CourseItem[]> {
+
+    return of(this.account.courses[index].courseItems);
   }
 
 }

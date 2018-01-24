@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule }   from '@angular/forms';
 
 
 import { AppComponent } from './app.component';
@@ -13,6 +14,7 @@ import { SupportComponent } from './support/support.component';
 import { LandingComponent } from './landing/landing.component';
 import { CourseSummaryComponent } from './dashboard/course-summary/course-summary.component';
 import { AccountDataService } from './account-data.service';
+import { CourseItemComponent } from './course/course-item/course-item.component';
 
 
 @NgModule({
@@ -24,11 +26,13 @@ import { AccountDataService } from './account-data.service';
     AccountComponent,
     SupportComponent,
     LandingComponent,
-    CourseSummaryComponent
+    CourseSummaryComponent,
+    CourseItemComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     NgbModule.forRoot()
   ],
   providers: [AccountDataService],

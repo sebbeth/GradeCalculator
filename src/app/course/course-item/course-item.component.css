@@ -1,0 +1,12 @@
+.taskSummaryContainer {
+
+  background-color: grey;
+  padding:20px;
+}
+
+.markCell {
+
+  background-color: red;
+
+  padding:25px;
+}

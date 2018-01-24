@@ -1,7 +1,9 @@
 <div class="container">
 
+<br>
+<br>
   <div class="row">
-    <h2>SENG3400</h2>
+    <h2>{{course.title}}</h2>
   </div>
 
   <canvas id="pieChart" width="400" height="400"></canvas>
@@ -15,7 +17,17 @@
   <div class="row justify-content-md-center">
     <div class="col-sm-5">
       <div class="progress">
-        <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25% Marked</div>
+        <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{course.percentMarked}}% Marked</div>
+      </div>
+    </div>
+  </div>
+
+  <br><br><br>
+
+  <div class="row justify-content-md-center">
+    <div class="col-sm-5">
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Weighting breakdown</div>
       </div>
     </div>
   </div>
@@ -23,82 +35,19 @@
   <br><br><br>
 
 
-    <!-- Header row -->
-    <div class="row justify-content-md-center">
-      <div class="col-sm-5 bg-info">
-      </div>
-      <div class="col-sm-2 bg-info text-center">
-        <span>Need</span>
-      </div>
-      <div class="col-sm-2 bg-info text-center">
-        <span>My Mark</span>
-      </div>
+  <!-- Header row -->
+  <div class="row justify-content-md-center">
+    <div class="col-sm-5 bg-info">
     </div>
-
-    <div class="row justify-content-md-center "> <!-- ROW -->
-      <div class="col-sm-5 bg-light taskSummaryContainer">
-        <div class="row">
-          <div class="col-sm-8">
-            <h3>Final Exam</h3>
-          </div>
-            <span>edit  copy</span>
-        </div>
-        <div class="row"></div>
-          <span>Weighting: 40%</span>
-          <span>Total marks: 100</span>
-
-        </div>
-      <div class="col-sm-2 text-center bg-light markCell">
-        <span>4/5</span>
-      </div>
-      <div class="col-sm-2 text-center bg-light markCell">
-        <span>--</span>
-      </div>
+    <div class="col-sm-2 bg-info text-center">
+      <span>Need</span>
     </div>
-
-    <div class="row justify-content-md-center"> <!-- ROW -->
-      <div class="col-sm-9 bg-light taskSummaryContainer">
-        <div class="row">
-          <div class="col-sm-4">
-            <a href="">Title</a>
-            <a href="">Weighting</a>
-            <a href="">Possible marks</a>
-            <a href="">Minimum mark</a>
-
-          </div>
-        </div>
-        <div class="row"></div>
-
-
-        </div>
-
+    <div class="col-sm-2 bg-info text-center">
+      <span>My Mark</span>
     </div>
+  </div>
 
-
-    <div class="row justify-content-md-center"> <!-- ROW -->
-      <div class="col-sm-5 bg-light taskSummaryContainer">
-        <div class="row">
-          <div class="col-sm-8">
-            <h3>Final Exam</h3>
-          </div>
-            <span>edit  copy</span>
-        </div>
-        <div class="row"></div>
-          <span>Weighting: 40%</span>
-          <span>Total marks: 100</span>
-
-        </div>
-      <div class="col-sm-2 text-center bg-light markCell">
-        <span>4/5</span>
-      </div>
-      <div class="col-sm-2 text-center bg-light markCell">
-        <span>--</span>
-      </div>
-    </div>
-
-
-
-
-
-
+  <div *ngFor="let courseItem of courseItems">
+    <app-course-item [courseItem]="courseItem"></app-course-item>
+  </div>
 </div>
