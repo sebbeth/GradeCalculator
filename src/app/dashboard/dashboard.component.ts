@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Account} from '../account';
 import {Course} from '../course';
+import {Blerp} from '../blerp';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { CourseSummaryComponent } from './course-summary/course-summary.component';
 
@@ -15,14 +17,27 @@ export class DashboardComponent implements OnInit {
 
   account: Account;
 
+  array: Blerp[];
+  testVal: string;
+
   courses: Course[];
 
 
-  constructor(private accountData: AccountDataService) { }
+  constructor(private http: HttpClient, private accountData: AccountDataService) { }
 
   ngOnInit() {
     this.getAccount();
     this.getCourses();
+    this.testV();
+  }
+
+
+  testV(): void {
+
+      this.http.get('http://localhost:80/GradeCalculatorAPI/test.php').subscribe(data => {
+        this.testVal = data['results'];
+      });
+      //this.testVal = this.accountData.testRequest();
   }
 
   getAccount(): void {

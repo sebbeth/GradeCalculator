@@ -1,4 +1,6 @@
 import { Component, OnInit, Input} from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 import { Course } from '../course';
 import { CourseItem } from '../course-item';
 import { AccountDataService } from '../account-data.service';
@@ -13,7 +15,11 @@ export class CourseComponent implements OnInit {
   course: Course;
   courseItems: CourseItem[];
 
-  constructor(private accountData: AccountDataService) {
+  constructor(
+    private route: ActivatedRoute,
+    private accountData: AccountDataService) {
+
+    const title = +this.route.snapshot.paramMap.get('title');
    this.getCourse(0);
    this.getItems(0);
 

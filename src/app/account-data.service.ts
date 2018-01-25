@@ -1,10 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
+import { Http } from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import {Course} from './course';
 import {Account} from './account';
 import {CourseItem} from './course-item';
+import {Blerp} from './blerp';
+
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 
 /*
@@ -48,7 +56,18 @@ export class AccountDataService {
 
   };
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
+
+   results: string[];
+
+  testRequest()  {
+
+      this.http.get('http://localhost:80/GradeCalculatorAPI/test.php').subscribe(data => {
+        this.results = data['results'];
+      });
+
+      return this.results[0];
+  }
 
   getAccount(): Observable<Account> {
 
