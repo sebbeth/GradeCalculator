@@ -20,6 +20,8 @@ export class DashboardComponent implements OnInit {
   array: Blerp[];
   testVal: string;
 
+  apiAccount: Account;
+
   courses: Course[];
 
 
@@ -28,16 +30,36 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.getAccount();
     this.getCourses();
-    this.testV();
+    //this.testV();
+  }
+
+  // Currently disabled,
+  constructAccount(jsonObject): Account {
+
+    this.testVal = jsonObject['username'];
+
+    var account: Account = {
+      username: jsonObject['username'],
+      fullname: jsonObject['fullname'],
+      unitsCompleted: jsonObject['unitsCompleted'],
+      GPA: jsonObject['GPA'],
+      institutionName: jsonObject['institutionName'],
+      courses: null
+
+    };
+
+    return account;
+
   }
 
 
+  // Currently disabled, 
   testV(): void {
 
-      this.http.get('http://localhost:80/GradeCalculatorAPI/test.php').subscribe(data => {
-        this.testVal = data['results'];
+      this.http.get<Account>('http://localhost:80/GradeCalculatorAPI/test.php').subscribe(data => {
+        //this.apiAccount = data;
+         this.account = this.constructAccount(data['0']);
       });
-      //this.testVal = this.accountData.testRequest();
   }
 
   getAccount(): void {

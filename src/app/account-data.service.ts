@@ -58,15 +58,19 @@ export class AccountDataService {
 
   constructor(private http: HttpClient) { }
 
-   results: string[];
+   result: string;
+   data: any[];
 
-  testRequest()  {
+  testRequest(){
 
-      this.http.get('http://localhost:80/GradeCalculatorAPI/test.php').subscribe(data => {
-        this.results = data['results'];
-      });
 
-      return this.results[0];
+    /*this.http.get('http://localhost:80/GradeCalculatorAPI/test.php').subscribe(this.data => {
+      this.result = this.data['results'];
+    }); */
+
+    //  return this.result;
+
+    //  return this.http.get<string[]>('http://localhost:80/GradeCalculatorAPI/test.php');
   }
 
   getAccount(): Observable<Account> {
