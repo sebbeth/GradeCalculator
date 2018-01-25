@@ -7,6 +7,7 @@ title: string;
 currentPercent: number;
 currentGrade: string
 percentMarked: number;
+finished: boolean;
 courseItems: CourseItem[];
 
 }

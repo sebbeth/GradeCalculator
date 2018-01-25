@@ -20,7 +20,7 @@ export class DashboardComponent implements OnInit {
   array: Blerp[];
   testVal: string;
 
-  apiAccount: Account;
+  showCompleted: boolean;
 
   courses: Course[];
 
@@ -28,6 +28,7 @@ export class DashboardComponent implements OnInit {
   constructor(private http: HttpClient, private accountData: AccountDataService) { }
 
   ngOnInit() {
+    this.showCompleted = false; //TODO make this work
     this.getAccount();
     this.getCourses();
     //this.testV();
@@ -53,7 +54,7 @@ export class DashboardComponent implements OnInit {
   }
 
 
-  // Currently disabled, 
+  // Currently disabled,
   testV(): void {
 
       this.http.get<Account>('http://localhost:80/GradeCalculatorAPI/test.php').subscribe(data => {

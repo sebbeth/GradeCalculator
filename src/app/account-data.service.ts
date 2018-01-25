@@ -27,32 +27,33 @@ export class AccountDataService {
 
   a: CourseItem = {
     title: 'Assignment 1',
-    weighting: 20,
+    weighting: 50,
     possibleMark: 100,
     minimumMark: 0,
     neededMark: 40,
-    markRecieved: 50
+    markRecieved: 60
   };
   b: CourseItem = {
     title: 'Final Exam',
-    weighting: 60,
+    weighting: 50,
     possibleMark: 100,
     minimumMark: 40,
     neededMark: 40,
-    markRecieved: 80
+    markRecieved: null
   };
 
-  course1: Course = {id:1, title: 'SENG2050',currentPercent: 80,currentGrade: 'Distinction', percentMarked:70, courseItems:[this.a,this.b]};
-  course2: Course = {id:2, title: 'COMP2050',currentPercent: 65,currentGrade: 'High Distinction', percentMarked:40,courseItems:null};
+  course1: Course = {id:0, title: 'SENG2050',currentPercent: 80,currentGrade: 'Distinction', percentMarked:70, finished: false, courseItems:[this.a,this.b]};
+  course2: Course = {id:1, title: 'COMP2050',currentPercent: 65,currentGrade: 'High Distinction', percentMarked:40, finished: false, courseItems:null};
+  course3: Course = {id:2, title: 'MATH1110',currentPercent: 65,currentGrade: 'High Distinction', percentMarked:100, finished: true, courseItems:null};
 
 
   account: Account = {
     username: 'user',
-    fullname: 'Test McTestFace',
+    fullname: 'Test Student',
     unitsCompleted: 100,
     GPA: 5.1,
     institutionName: 'University of Newcastle',
-    courses: [this.course1,this.course2]
+    courses: [this.course1,this.course2,this.course3]
 
   };
 
