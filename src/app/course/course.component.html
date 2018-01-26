@@ -3,7 +3,11 @@
 <br>
 <br>
   <div class="row">
-    <h2>{{course.title}}</h2>
+    <h2>{{course.code}}</h2>
+
+  </div>
+  <div class="row">
+    <h3>{{course.title}}</h3>
   </div>
 
   <canvas id="pieChart" width="400" height="400"></canvas>
@@ -15,7 +19,7 @@
   <br><br><br>
 
   <div class="row justify-content-md-center">
-    <span>Current grade: {{course.currentPercent}}</span>
+    <h2>Current grade: {{course.currentPercent}}</h2>
   </div>
 
 
@@ -55,12 +59,12 @@
   </div>
 
   <div *ngFor="let courseItem of courseItems">
-    <app-course-item [courseItem]="courseItem"></app-course-item>
+    <app-course-item [courseItem]="courseItem" [course]="course"></app-course-item>
   </div>
 
   <div class="row justify-content-md-center">
     <div class="col-sm-9 bg-info text-center" style="padding:25px;">
-      <span>Add Assignment</span>
+      <button (click)="addItem()">Add Assignment</button>
     </div>
   </div>
 </div>

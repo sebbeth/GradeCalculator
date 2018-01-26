@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CourseItem } from '../../course-item';
+import { Course } from '../../course';
+import { AccountDataService } from '../../account-data.service';
 
 @Component({
   selector: 'app-course-item',
@@ -9,10 +11,16 @@ import { CourseItem } from '../../course-item';
 export class CourseItemComponent implements OnInit {
 
   @Input() courseItem: CourseItem;
+  @Input() course: Course;
+
   editItem: boolean;
 
-  constructor() {
+  constructor(private accountData: AccountDataService) {
     this.editItem = false;
+ }
+
+ ngOnInit() {
+   this.editItem = false;
  }
 
   openEditItem() {
@@ -24,8 +32,14 @@ export class CourseItemComponent implements OnInit {
 
   }
 
-  ngOnInit() {
-    this.editItem = false;
+  deleteItem() {
+    this.accountData.deleteCourseItem(this.courseItem,this.course);
+  }
+
+  copyItem() {
+    this.accountData.copyCourseItem(this.courseItem,this.course);
 
   }
+
+
 }

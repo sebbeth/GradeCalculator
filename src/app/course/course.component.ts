@@ -35,6 +35,10 @@ export class CourseComponent implements OnInit {
         .subscribe(courseItems => this.courseItems = courseItems);
   }
 
+  addItem() {
+    this.accountData.addCourseItem(this.course);
+  }
+
   ngOnInit() {
 
   }

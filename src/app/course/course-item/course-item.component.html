@@ -1,10 +1,11 @@
-<div *ngIf="!editItem" class="row justify-content-md-center "> <!-- ROW -->
+<!-- Item information view -->
+<div *ngIf="!editItem" class="row justify-content-md-center ">
   <div class="col-sm-5 bg-light taskSummaryContainer">
     <div class="row">
       <div class="col-sm-8">
         <h3>{{courseItem.title}}</h3>
       </div>
-      <a (click)="openEditItem()" class="btn">edit</a>   <span>copy</span>
+      <a (click)="openEditItem()" class="btn">edit</a>   <a (click)="copyItem()" class="btn">copy</a>
     </div>
     <div class="row">
     </div>
@@ -25,7 +26,8 @@
 </div>
 </div>
 
-<div  *ngIf="editItem" class="row justify-content-md-center"> <!-- ROW -->
+<!-- Item edit view -->
+<div  *ngIf="editItem" class="row justify-content-md-center">
   <div class="col-sm-9 bg-light taskSummaryContainer">
     <form #editItemForm="ngForm">
 
@@ -52,6 +54,8 @@
       </div>
 
       <button (click)="closeEditItem()" class="btn btn-success">Save</button>
+      <button (click)="deleteItem()" class="btn btn-danger">Delete</button>
+
     </form>
   </div>
 </div>
