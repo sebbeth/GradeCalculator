@@ -41,5 +41,9 @@ export class CourseItemComponent implements OnInit {
 
   }
 
+  onMarkRecievedKeyUp(event) {
+    this.accountData.update();
+  }
+
 
 }

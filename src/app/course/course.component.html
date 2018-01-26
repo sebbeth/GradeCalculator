@@ -19,7 +19,20 @@
   <br><br><br>
 
   <div class="row justify-content-md-center">
-    <h2>Current grade: {{course.currentPercent}}</h2>
+    <h3>Current grade</h3>
+  </div>
+  <div class="row justify-content-md-center">
+    <!-- progress circle from: https://bootsnipp.com/snippets/featured/circle-progress-bar-->
+    <div class="progress-circle blue">
+      <span class="progress-circle-left">
+        <span class="progress-circle-bar"></span>
+      </span>
+      <span class="progress-circle-right">
+        <span class="progress-circle-bar"></span>
+      </span>
+      <div class="progress-circle-value">{{course.currentPercent}}</div>
+    </div>
+    <!-- /progress circle -->
   </div>
 
 

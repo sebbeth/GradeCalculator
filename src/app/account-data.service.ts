@@ -140,8 +140,30 @@ export class AccountDataService {
 
   }
 
+  /*
+  update()
+  A function that, when called, recalculates all derived data values.
+  */
+  update() {
+
+    for (let course of this.account.courses) {
+
+      for (let courseItem of course.courseItems) {
+
+        if (courseItem.markRecieved != null) {
+          course.currentPercent = course.currentPercent + courseItem.markRecieved;
+
+        }
+
+      }
+
+    }
+  }
 
 
+  /*
+  A helper function used to determine .sort()'s output
+  */
   courseItemComparison(a,b) {
     if (a.weighting > b.weighting) {
       return -1;
