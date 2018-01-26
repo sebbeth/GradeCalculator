@@ -11,10 +11,21 @@ export class CourseSummaryComponent implements OnInit {
 
   @Input()
   course: Course;
+  finished: boolean;
 
-  constructor() { }
+  cardCss: string;
+
+  constructor() {
+  this.cardCss = 'card';
+ }
 
   ngOnInit() {
+    this.cardCss = 'card';
+    this.finished = true;
+
+    if (this.course.finished) {
+      this.cardCss = 'card border-secondary mb-3';
+    }
   }
 
 }

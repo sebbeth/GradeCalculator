@@ -1,5 +1,5 @@
 <div class="col-sm">
-  <div class="card ">
+  <div class="{{cardCss}}">
     <div class="card-body">
       <h4 class="card-title">{{course.title}}</h4>
       <br>
@@ -20,11 +20,14 @@
 
     </div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item">
+      <li *ngIf="!course.finished" class="list-group-item">
         <p class="card-text">Marked</p>
         <div class="progress">
           <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow='25' aria-valuemin="0" aria-valuemax="100">{{course.percentMarked}}%</div>
         </div>
+      </li>
+      <li *ngIf="course.finished" class="list-group-item bg-success">
+        <p class="card-text text-center">Finished</p>
       </li>
     </ul>
     <div class="card-body">

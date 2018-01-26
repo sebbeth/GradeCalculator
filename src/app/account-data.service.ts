@@ -94,4 +94,9 @@ export class AccountDataService {
     return of(this.account.courses[index].courseItems);
   }
 
+  addAccount(newAccount): void {
+    
+
+  }
+
 }

@@ -12,6 +12,12 @@
   <div class="row justify-content-md-center">
     <span>Pie chart of content marked</span>
   </div>
+  <br><br><br>
+
+  <div class="row justify-content-md-center">
+    <span>Current grade: {{course.currentPercent}}</span>
+  </div>
+
 
   <br><br><br>
   <div class="row justify-content-md-center">
@@ -36,18 +42,25 @@
 
 
   <!-- Header row -->
+    <h2>Assessment Items:</h2>
   <div class="row justify-content-md-center">
-    <div class="col-sm-5 bg-info">
+    <div class="col-sm-5 bg-info" style="padding:25px;">
     </div>
-    <div class="col-sm-2 bg-info text-center">
-      <span>Need</span>
+    <div class="col-sm-2 bg-info text-center" style="padding:15px;">
+      <span>Mark needed to pass</span>
     </div>
-    <div class="col-sm-2 bg-info text-center">
-      <span>My Mark</span>
+    <div class="col-sm-2 bg-info text-center" style="padding:15px;">
+      <span>My mark</span>
     </div>
   </div>
 
   <div *ngFor="let courseItem of courseItems">
     <app-course-item [courseItem]="courseItem"></app-course-item>
+  </div>
+
+  <div class="row justify-content-md-center">
+    <div class="col-sm-9 bg-info text-center" style="padding:25px;">
+      <span>Add Assignment</span>
+    </div>
   </div>
 </div>
