@@ -42,30 +42,60 @@ export class AccountDataService {
     markRecieved: null
   };
 
-  course1: Course = {id:0, title: 'Web Engineering',code: 'SENG2050',currentPercent: 80,currentGrade: 'Distinction', percentMarked:70, finished: false, courseItems:[this.a,this.b]};
-  course2: Course = {id:1, title: 'Internet stuff',code: 'COMP2050',currentPercent: 65,currentGrade: 'High Distinction', percentMarked:40, finished: false, courseItems:null};
-  course3: Course = {id:2, title: 'Maths',code: 'MATH1110',currentPercent: 65,currentGrade: 'High Distinction', percentMarked:100, finished: true, courseItems:null};
-
-
-  account: Account = {
-    username: 'user',
-    fullname: 'Test Student',
-    unitsCompleted: 100,
-    GPA: 5.1,
-    institutionName: 'University of Newcastle',
-    courses: [this.course1,this.course2,this.course3]
-
+  course1: Course = {id:0,
+    title: 'Web Engineering',
+    code: 'SENG2050',
+    currentPercent: 0,
+    currentGrade: 'Distinction',
+    percentMarked:70,
+    finished: false,
+    courseItems:[this.a,this.b],
+    courseItemsWeightingChecksum: 1
   };
+  course2: Course = {id:1,
+    title: 'Internet stuff',
+    code: 'COMP2050',currentPercent: 0,
+    currentGrade: 'High Distinction', percentMarked:40,
+    finished: false,
+    courseItems:null,
+    courseItemsWeightingChecksum: 1
+  };
+  course3: Course = {id:2,
+    title: 'Maths',
+    code: 'MATH1110',
+    currentPercent: 0,
+    currentGrade: 'High Distinction',
+    percentMarked:100,
+    finished: true,
+    courseItems:null,
+    courseItemsWeightingChecksum: 1
+};
 
-  constructor(private http: HttpClient) { }
 
-   result: string;
-   data: any[];
+    account: Account = {
+      username: 'user',
+      fullname: 'Test Student',
+      unitsCompleted: 100,
+      GPA: 5.1,
+      institutionName: 'University of Newcastle',
+      courses: [this.course1,this.course2,this.course3]
 
-  testRequest(){
+    };
 
 
-    /*this.http.get('http://localhost:80/GradeCalculatorAPI/test.php').subscribe(this.data => {
+
+    constructor(private http: HttpClient) {
+
+    }
+
+
+    result: string;
+    data: any[];
+
+    testRequest(){
+
+
+      /*this.http.get('http://localhost:80/GradeCalculatorAPI/test.php').subscribe(this.data => {
       this.result = this.data['results'];
     }); */
 
@@ -140,25 +170,35 @@ export class AccountDataService {
 
   }
 
+
   /*
   update()
   A function that, when called, recalculates all derived data values.
+  This is where grades are calculated.
   */
   update() {
 
     for (let course of this.account.courses) {
 
+      let totalWeightedResults = 0;
+      let courseItemWeightingSum = 0;
+
       for (let courseItem of course.courseItems) {
-
         if (courseItem.markRecieved != null) {
-          course.currentPercent = course.currentPercent + courseItem.markRecieved;
-
+          // calculate the new course grade.
+          totalWeightedResults += (courseItem.markRecieved / courseItem.possibleMark) * courseItem.weighting;
         }
-
+        // calculate new weighting checksum
+        courseItemWeightingSum += parseInt(courseItem.weighting);
       }
+      // set new course grade
+      course.currentPercent = totalWeightedResults ;
 
+      // set new weighting Checksum
+      course.courseItemsWeightingChecksum = courseItemWeightingSum;
     }
   }
+
 
 
   /*

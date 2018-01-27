@@ -10,5 +10,6 @@ currentGrade: string
 percentMarked: number;
 finished: boolean;
 courseItems: CourseItem[];
+courseItemsWeightingChecksum: number;
 
 }

@@ -20,7 +20,7 @@
 
   <form #markRecievedForm="ngForm">
   <div class="col-sm-10 text-center bg-light markCell">
-        <input (keyup)="onMarkRecievedKeyUp($event)" [(ngModel)]="courseItem.markRecieved" name="markRecieved" type="text" class="form-control" id="title" required >
+        <input (keyup)="onMarkRecievedKeyUp($event)" [(ngModel)]="courseItem.markRecieved" name="markRecieved" type="text" class="form-control" id="title" required > <span>/ {{courseItem.possibleMark}}</span>
   </div>
   </form>
 </div>
