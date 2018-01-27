@@ -76,9 +76,11 @@ export class AccountDataService {
 
     account: Account = {
       username: 'user',
-      fullname: 'Test Student',
+      fullname: 'Sebastian Brown',
       unitsCompleted: 100,
-      GPA: 5.1,
+      GPA: 6.1,
+      program: 'Batchelor of Engineering (Software)',
+      email: 'seb@email.com',
       institutionName: 'University of Newcastle',
       courses: [this.course1,this.course2,this.course3]
 

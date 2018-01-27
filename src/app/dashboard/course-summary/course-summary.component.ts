@@ -9,8 +9,8 @@ import {Course} from '../../course';
 })
 export class CourseSummaryComponent implements OnInit {
 
-  @Input()
-  course: Course;
+  @Input() course: Course;
+
   finished: boolean;
 
   cardCss: string;
@@ -21,7 +21,6 @@ export class CourseSummaryComponent implements OnInit {
 
   ngOnInit() {
     this.cardCss = 'card';
-    this.finished = true;
 
     if (this.course.finished) {
       this.cardCss = 'card border-secondary mb-3';

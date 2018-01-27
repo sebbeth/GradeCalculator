@@ -44,6 +44,8 @@ export class DashboardComponent implements OnInit {
       fullname: jsonObject['fullname'],
       unitsCompleted: jsonObject['unitsCompleted'],
       GPA: jsonObject['GPA'],
+      program: jsonObject['program'],
+      email: jsonObject['email'],
       institutionName: jsonObject['institutionName'],
       courses: null
 

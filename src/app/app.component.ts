@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AccountDataService } from './account-data.service';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-root',
