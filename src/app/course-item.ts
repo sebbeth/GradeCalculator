@@ -5,6 +5,7 @@ export class CourseItem {
   minimumMark: number;
   neededMark: number;
   markRecieved: number;
+  type: string;
 
 
 

@@ -25,6 +25,10 @@ export class CourseComponent implements OnInit {
 
   }
 
+  ngOnInit() {
+
+  }
+
   getCourse(index) {
     this.accountData.getCourseAtIndex(index)
         .subscribe(course => this.course = course);
@@ -39,10 +43,9 @@ export class CourseComponent implements OnInit {
     this.accountData.addCourseItem(this.course);
   }
 
-  ngOnInit() {
 
-    //this.accountData.update();
-  }
+
+
 
 
 

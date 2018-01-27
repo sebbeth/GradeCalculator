@@ -31,7 +31,8 @@ export class AccountDataService {
     possibleMark: 100,
     minimumMark: 0,
     neededMark: 40,
-    markRecieved: 60
+    markRecieved: 60,
+    type: 'Assignment'
   };
   b: CourseItem = {
     title: 'Final Exam',
@@ -39,7 +40,8 @@ export class AccountDataService {
     possibleMark: 100,
     minimumMark: 40,
     neededMark: 40,
-    markRecieved: null
+    markRecieved: null,
+    type: 'Exam'
   };
 
   course1: Course = {id:0,
@@ -133,7 +135,8 @@ export class AccountDataService {
       possibleMark: 0,
       minimumMark: null,
       neededMark: null,
-      markRecieved: null
+      markRecieved: null,
+      type: 'Assignment'
 
     }
 
@@ -160,8 +163,8 @@ export class AccountDataService {
       possibleMark: item.possibleMark,
       minimumMark: item.minimumMark,
       neededMark: null, // Note, this is not copied.
-      markRecieved: null // Note, this is not copied.
-
+      markRecieved: null, // Note, this is not copied.
+      type: 'Assignment'
     }
 
     course.courseItems.push(newItem);
@@ -182,20 +185,27 @@ export class AccountDataService {
 
       let totalWeightedResults = 0;
       let courseItemWeightingSum = 0;
+      let percentMarkedCounter = 0; // TODO this is not quite working
 
       for (let courseItem of course.courseItems) {
+
         if (courseItem.markRecieved != null) {
           // calculate the new course grade.
           totalWeightedResults += (courseItem.markRecieved / courseItem.possibleMark) * courseItem.weighting;
+          percentMarkedCounter += Number(courseItem.weighting);
         }
         // calculate new weighting checksum
-        courseItemWeightingSum += parseInt(courseItem.weighting);
+        courseItemWeightingSum += Number(courseItem.weighting);
+
       }
       // set new course grade
       course.currentPercent = totalWeightedResults ;
 
       // set new weighting Checksum
       course.courseItemsWeightingChecksum = courseItemWeightingSum;
+
+      // Set percentMarked
+      course.percentMarked = percentMarkedCounter;
     }
   }
 
