@@ -10,10 +10,8 @@ import {CourseItem} from './course-item';
 import {Blerp} from './blerp';
 
 
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
 
+const apiRootURL = 'http://localhost:80/GradeCalculatorAPI';
 
 /*
 
@@ -87,26 +85,12 @@ export class AccountDataService {
     };
 
 
-
     constructor(private http: HttpClient) {
 
     }
 
 
-    result: string;
-    data: any[];
 
-    testRequest(){
-
-
-      /*this.http.get('http://localhost:80/GradeCalculatorAPI/test.php').subscribe(this.data => {
-      this.result = this.data['results'];
-    }); */
-
-    //  return this.result;
-
-    //  return this.http.get<string[]>('http://localhost:80/GradeCalculatorAPI/test.php');
-  }
 
   getAccount(): Observable<Account> {
 
@@ -127,6 +111,34 @@ export class AccountDataService {
 
     return of(this.account.courses[index].courseItems);
   }
+
+
+
+  constructAccount(jsonObject): Account {
+
+    var account: Account = {
+      username: jsonObject['username'],
+      fullname: jsonObject['fullname'],
+      unitsCompleted: jsonObject['unitsCompleted'],
+      GPA: jsonObject['GPA'],
+      program: jsonObject['program'],
+      email: jsonObject['email'],
+      institutionName: jsonObject['institutionName'],
+      courses: null
+    };
+    return account;
+  }
+
+
+  // Currently disabled,
+  getFromDB(): void {
+      this.http.get<Account>('http://localhost:80/GradeCalculatorAPI/account/?user=seb').subscribe(data => {
+        //this.apiAccount = data;
+         this.account = this.constructAccount(data);
+      });
+  }
+
+
 
   addCourseItem(parentCourse): void {
 
