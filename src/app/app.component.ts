@@ -16,7 +16,7 @@ export class AppComponent {
 
   ngAfterViewChecked() {
 
-    this.accountData.update();
+    //this.accountData.update();
   }
 
 }

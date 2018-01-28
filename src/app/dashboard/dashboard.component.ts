@@ -16,12 +16,7 @@ import { AccountDataService } from '../account-data.service';
 export class DashboardComponent implements OnInit {
 
   account: Account;
-
-  array: Blerp[];
-  testVal: string;
-
   showCompleted: boolean;
-
   courses: Course[];
 
 
@@ -29,41 +24,18 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.showCompleted = false; //TODO make this work
+
+
+    this.getAccountFromAPI();
+
+
+
     this.getAccount();
     this.getCourses();
-  //  this.testV();
-  }
 
-  // Currently disabled,
-  constructAccount(jsonObject): Account {
-
-    this.testVal = jsonObject['username'];
-
-    var account: Account = {
-      username: jsonObject['username'],
-      fullname: jsonObject['fullname'],
-      unitsCompleted: jsonObject['unitsCompleted'],
-      GPA: jsonObject['GPA'],
-      program: jsonObject['program'],
-      email: jsonObject['email'],
-      institutionName: jsonObject['institutionName'],
-      courses: null
-
-    };
-
-    return account;
 
   }
 
-
-  // Currently disabled,
-  testV(): void {
-
-      this.http.get<Account>('http://localhost:80/GradeCalculatorAPI/account/?user=seb').subscribe(data => {
-        //this.apiAccount = data;
-         this.account = this.constructAccount(data);
-      });
-  }
 
   getAccount(): void {
     this.accountData.getAccount()
@@ -74,5 +46,19 @@ export class DashboardComponent implements OnInit {
     this.accountData.getCourses()
         .subscribe(courses => this.courses = courses);
   }
+
+
+
+    /*
+    getAccountFromAPI
+
+    Function that performs API request and fills account object with result.
+    */
+    getAccountFromAPI(): void {
+        this.http.get(this.accountData.apiRootURL + '/account/?user=seb').subscribe(data => {
+          this.account = this.accountData.constructAccount(data); // Result of request stored in AccountData account object.
+        });
+    }
+
 
 }

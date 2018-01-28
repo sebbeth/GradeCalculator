@@ -10,9 +10,6 @@ import {CourseItem} from './course-item';
 import {Blerp} from './blerp';
 
 
-
-const apiRootURL = 'http://localhost:80/GradeCalculatorAPI';
-
 /*
 
 This class is the data source for account data.
@@ -21,6 +18,8 @@ This class is the data source for account data.
 
 @Injectable()
 export class AccountDataService {
+
+  apiRootURL = 'http://localhost:80/GradeCalculatorAPI';
 
 
   a: CourseItem = {
@@ -85,6 +84,12 @@ export class AccountDataService {
     };
 
 
+
+//account: Account;
+courses: Course[];
+
+
+
     constructor(private http: HttpClient) {
 
     }
@@ -107,6 +112,21 @@ export class AccountDataService {
     return of(this.account.courses[index]);
   }
 
+  getCourseWithCode(code):Observable<Course> {
+    console.log('OUT ' + code);
+
+    if (this.courses != null) {
+    for (let course of this.courses) {
+
+      if (course.code == code) {
+        return of(course);
+      }
+    }
+  }
+
+
+  }
+
   getCourseAtIndexItems(index):Observable<CourseItem[]> {
 
     return of(this.account.courses[index].courseItems);
@@ -114,9 +134,12 @@ export class AccountDataService {
 
 
 
+
+
   constructAccount(jsonObject): Account {
 
-    var account: Account = {
+
+      var newAccount: Account = {
       username: jsonObject['username'],
       fullname: jsonObject['fullname'],
       unitsCompleted: jsonObject['unitsCompleted'],
@@ -124,19 +147,39 @@ export class AccountDataService {
       program: jsonObject['program'],
       email: jsonObject['email'],
       institutionName: jsonObject['institutionName'],
-      courses: null
+      courses: new Array<Course>()
     };
-    return account;
+
+
+
+    for (let course of jsonObject['courses']) {
+
+        var newCourse: Course = {
+          id:0,
+          title: course.title,
+          code: course.code,
+          currentPercent: course.currentPercent,
+          currentGrade: course.currentGrade,
+          percentMarked: course.percentMarked,
+          finished: course.finished,
+          courseItems:null,
+          courseItemsWeightingChecksum: 1
+        };
+
+        newAccount.courses.push(newCourse);
+
+
+
+    }
+
+
+    this.account = newAccount;
+    this.courses = newAccount.courses;
+    return newAccount;
+
   }
 
 
-  // Currently disabled,
-  getFromDB(): void {
-      this.http.get<Account>('http://localhost:80/GradeCalculatorAPI/account/?user=seb').subscribe(data => {
-        //this.apiAccount = data;
-         this.account = this.constructAccount(data);
-      });
-  }
 
 
 
@@ -195,6 +238,7 @@ export class AccountDataService {
   */
   update() {
 
+    if (this.account.courses != null ) {
     for (let course of this.account.courses) {
 
       let totalWeightedResults = 0;
@@ -221,6 +265,7 @@ export class AccountDataService {
       // Set percentMarked
       course.percentMarked = percentMarkedCounter;
     }
+  }
   }
 
 
