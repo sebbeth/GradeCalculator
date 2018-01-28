@@ -31,7 +31,7 @@ export class DashboardComponent implements OnInit {
     this.showCompleted = false; //TODO make this work
     this.getAccount();
     this.getCourses();
-    //this.testV();
+  //  this.testV();
   }
 
   // Currently disabled,
@@ -59,9 +59,9 @@ export class DashboardComponent implements OnInit {
   // Currently disabled,
   testV(): void {
 
-      this.http.get<Account>('http://localhost:80/GradeCalculatorAPI/test.php').subscribe(data => {
+      this.http.get<Account>('http://localhost:80/GradeCalculatorAPI/account/?user=seb').subscribe(data => {
         //this.apiAccount = data;
-         this.account = this.constructAccount(data['0']);
+         this.account = this.constructAccount(data);
       });
   }
 
