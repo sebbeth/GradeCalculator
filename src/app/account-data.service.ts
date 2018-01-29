@@ -71,22 +71,18 @@ export class AccountDataService {
 };
 
 
-    account: Account = {
-      username: 'user',
-      fullname: 'Sebastian Brown [MOCK]',
-      unitsCompleted: 100,
-      GPA: 6.1,
-      program: 'Batchelor of Engineering (Software)',
-      email: 'seb@email.com',
-      institutionName: 'University of Newcastle',
-      courses: [this.course1,this.course2,this.course3]
+account: Account = {
+  username: 'user',
+  fullname: 'Sebastian Brown [MOCK]',
+  unitsCompleted: 100,
+  GPA: 6.1,
+  program: 'Batchelor of Engineering (Software)',
+  email: 'seb@email.com',
+  institutionName: 'University of Newcastle',
+  courses: [this.course1,this.course2,this.course3]
 
-    };
+};
 
-
-
-//account: Account;
-courses: Course[];
 
 
 
@@ -109,9 +105,11 @@ courses: Course[];
 
   getCourseAtIndex(index): Observable<Course> {
 
-    return of(this.account.courses[index]);
-  }
+      return of(this.account.courses[index]);
+    }
 
+
+/*
   getCourseWithCode(code):Observable<Course> {
     console.log('OUT ' + code);
 
@@ -125,7 +123,9 @@ courses: Course[];
   }
 
 
+
   }
+    */
 
   getCourseAtIndexItems(index):Observable<CourseItem[]> {
 
@@ -134,7 +134,7 @@ courses: Course[];
 
 
 
-
+/*
 
   constructAccount(jsonObject): Account {
 
@@ -173,12 +173,12 @@ courses: Course[];
     }
 
 
-    this.account = newAccount;
-    this.courses = newAccount.courses;
+    //this.account = newAccount;
+  //  this.courses = newAccount.courses;
     return newAccount;
 
   }
-
+*/
 
 
 

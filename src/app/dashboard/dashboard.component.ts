@@ -26,7 +26,7 @@ export class DashboardComponent implements OnInit {
     this.showCompleted = false; //TODO make this work
 
 
-    this.getAccountFromAPI();
+  //  this.getAccountFromAPI();
 
 
 
@@ -56,7 +56,7 @@ export class DashboardComponent implements OnInit {
     */
     getAccountFromAPI(): void {
         this.http.get(this.accountData.apiRootURL + '/account/?user=seb').subscribe(data => {
-          this.account = this.accountData.constructAccount(data); // Result of request stored in AccountData account object.
+    //      this.account = this.accountData.constructAccount(data); // Result of request stored in AccountData account object.
         });
     }
 

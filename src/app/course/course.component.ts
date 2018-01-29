@@ -27,10 +27,10 @@ export class CourseComponent implements OnInit {
 
   ngAfterViewChecked() {
     const title = +this.route.snapshot.paramMap.get('title');
+    this.getCourse(0);
     this.getItems(0);
-    this.getCourse(title);
 
-    this.getAccountFromAPI();
+//    this.getAccountFromAPI();
 
   }
 
@@ -38,10 +38,10 @@ export class CourseComponent implements OnInit {
 
   }
 
-  getCourse(code) {
-    this.accountData.getCourseWithCode(code)
-        .subscribe(course => this.course = course);
-  }
+  getCourse(index) {
+   this.accountData.getCourseAtIndex(index)
+       .subscribe(course => this.course = course);
+ }
 
   getItems(index) {
     this.accountData.getCourseAtIndexItems(index)
@@ -59,7 +59,7 @@ export class CourseComponent implements OnInit {
   */
   getAccountFromAPI(): void {
       this.http.get(this.accountData.apiRootURL + '/account/?user=seb').subscribe(data => {
-         this.accountData.constructAccount(data); // Result of request stored in AccountData account object.
+      //   this.accountData.constructAccount(data); // Result of request stored in AccountData account object.
       });
   }
 
