@@ -5,6 +5,7 @@ import { Account } from '../account';
 import { AccountDataService } from '../account-data.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
+
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
@@ -25,6 +26,4 @@ export class AccountComponent implements OnInit {
     this.accountData.getAccount()
         .subscribe(account => this.account = account);
   }
-
-
 }

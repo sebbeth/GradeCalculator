@@ -10,11 +10,6 @@ import {CourseItem} from './course-item';
 import {Blerp} from './blerp';
 
 
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
-
-
 /*
 
 This class is the data source for account data.
@@ -24,6 +19,8 @@ This class is the data source for account data.
 @Injectable()
 export class AccountDataService {
 
+  apiRootURL = 'http://localhost:80/GradeCalculatorAPI';
+
 
   a: CourseItem = {
     title: 'Assignment 1',
@@ -31,7 +28,8 @@ export class AccountDataService {
     possibleMark: 100,
     minimumMark: 0,
     neededMark: 40,
-    markRecieved: 60
+    markRecieved: 60,
+    type: 'Assignment'
   };
   b: CourseItem = {
     title: 'Final Exam',
@@ -39,7 +37,8 @@ export class AccountDataService {
     possibleMark: 100,
     minimumMark: 40,
     neededMark: 40,
-    markRecieved: null
+    markRecieved: null,
+    type: 'Exam'
   };
 
   course1: Course = {id:0,
@@ -72,6 +71,7 @@ export class AccountDataService {
 };
 
 
+
     account: Account = {
       username: 'user',
       fullname: '[MOCK] Test Student',
@@ -82,7 +82,6 @@ export class AccountDataService {
       institutionName: 'University of Newcastle',
       courses: [this.course1,this.course2,this.course3]
 
-    };
 
 
     constructor(private http: HttpClient) {
@@ -90,7 +89,7 @@ export class AccountDataService {
     }
 
 
-
+<
 
 
     constructAccount(jsonObject): Account {
@@ -125,17 +124,6 @@ export class AccountDataService {
         });
     }
 
-    testRequest(){
-
-
-      /*this.http.get('http://localhost:80/GradeCalculatorAPI/test.php').subscribe(this.data => {
-      this.result = this.data['results'];
-    }); */
-
-    //  return this.result;
-
-    //  return this.http.get<string[]>('http://localhost:80/GradeCalculatorAPI/test.php');
-  }
 
   getAccount(): Observable<Account> {
     this.getAccountFromAPI();
@@ -149,13 +137,83 @@ export class AccountDataService {
 
   getCourseAtIndex(index): Observable<Course> {
 
-    return of(this.account.courses[index]);
+      return of(this.account.courses[index]);
+    }
+
+
+/*
+  getCourseWithCode(code):Observable<Course> {
+    console.log('OUT ' + code);
+
+    if (this.courses != null) {
+    for (let course of this.courses) {
+
+      if (course.code == code) {
+        return of(course);
+      }
+    }
   }
+
+
+
+  }
+    */
 
   getCourseAtIndexItems(index):Observable<CourseItem[]> {
 
     return of(this.account.courses[index].courseItems);
   }
+
+
+
+/*
+
+  constructAccount(jsonObject): Account {
+
+
+      var newAccount: Account = {
+      username: jsonObject['username'],
+      fullname: jsonObject['fullname'],
+      unitsCompleted: jsonObject['unitsCompleted'],
+      GPA: jsonObject['GPA'],
+      program: jsonObject['program'],
+      email: jsonObject['email'],
+      institutionName: jsonObject['institutionName'],
+      courses: new Array<Course>()
+    };
+
+
+
+    for (let course of jsonObject['courses']) {
+
+        var newCourse: Course = {
+          id:0,
+          title: course.title,
+          code: course.code,
+          currentPercent: course.currentPercent,
+          currentGrade: course.currentGrade,
+          percentMarked: course.percentMarked,
+          finished: course.finished,
+          courseItems:null,
+          courseItemsWeightingChecksum: 1
+        };
+
+        newAccount.courses.push(newCourse);
+
+
+
+    }
+
+
+    //this.account = newAccount;
+  //  this.courses = newAccount.courses;
+    return newAccount;
+
+  }
+*/
+
+
+
 
   addCourseItem(parentCourse): void {
 
@@ -166,7 +224,8 @@ export class AccountDataService {
       possibleMark: 0,
       minimumMark: null,
       neededMark: null,
-      markRecieved: null
+      markRecieved: null,
+      type: 'Assignment'
 
     }
 
@@ -193,8 +252,8 @@ export class AccountDataService {
       possibleMark: item.possibleMark,
       minimumMark: item.minimumMark,
       neededMark: null, // Note, this is not copied.
-      markRecieved: null // Note, this is not copied.
-
+      markRecieved: null, // Note, this is not copied.
+      type: 'Assignment'
     }
 
     course.courseItems.push(newItem);
@@ -211,25 +270,34 @@ export class AccountDataService {
   */
   update() {
 
+    if (this.account.courses != null ) {
     for (let course of this.account.courses) {
 
       let totalWeightedResults = 0;
       let courseItemWeightingSum = 0;
+      let percentMarkedCounter = 0; // TODO this is not quite working
 
       for (let courseItem of course.courseItems) {
+
         if (courseItem.markRecieved != null) {
           // calculate the new course grade.
           totalWeightedResults += (courseItem.markRecieved / courseItem.possibleMark) * courseItem.weighting;
+          percentMarkedCounter += Number(courseItem.weighting);
         }
         // calculate new weighting checksum
         courseItemWeightingSum += Number(courseItem.weighting);
+
       }
       // set new course grade
       course.currentPercent = totalWeightedResults ;
 
       // set new weighting Checksum
       course.courseItemsWeightingChecksum = courseItemWeightingSum;
+
+      // Set percentMarked
+      course.percentMarked = percentMarkedCounter;
     }
+  }
   }
 
 

@@ -17,7 +17,6 @@ export class DashboardComponent implements OnInit {
   account: Account;
 
   showCompleted: boolean;
-
   courses: Course[];
 
 
@@ -27,41 +26,10 @@ export class DashboardComponent implements OnInit {
     this.showCompleted = false; //TODO make this work
     this.getAccount();
     this.getCourses();
-    //this.testV();
+   
   }
 
-  // Currently disabled,
-  /*
-  constructAccount(jsonObject): Account {
-
-    this.testVal = jsonObject['username'];
-
-    var account: Account = {
-      username: jsonObject['username'],
-      fullname: jsonObject['fullname'],
-      unitsCompleted: jsonObject['unitsCompleted'],
-      GPA: jsonObject['GPA'],
-      institutionName: jsonObject['institutionName'],
-      courses: null
-
-    };
-
-    return account;
-
-  }*/
-
-
-  // Currently disabled,
-  /*
-  testV(): void {
-
-      this.http.get<Account>('http://localhost:80/GradeCalculatorAPI/test.php').subscribe(data => {
-        //this.apiAccount = data;
-         this.account = this.constructAccount(data['0']);
-      });
-  }
-  */
-
+  
   getAccount(): void {
     this.accountData.getAccount()
         .subscribe(account => this.account = account);
@@ -71,5 +39,4 @@ export class DashboardComponent implements OnInit {
     this.accountData.getCourses()
         .subscribe(courses => this.courses = courses);
   }
-
 }

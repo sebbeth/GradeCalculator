@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AccountDataService } from './account-data.service';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -18,5 +19,10 @@ export class AppComponent {
       this.accountData.getAccount();
     }
 
+
+  ngAfterViewChecked() {
+
+    //this.accountData.update();
+  }
 
 }

@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 import { Course } from '../course';
 import { CourseItem } from '../course-item';
 import { AccountDataService } from '../account-data.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-course',
@@ -16,19 +17,31 @@ export class CourseComponent implements OnInit {
   courseItems: CourseItem[];
 
   constructor(
+    private http: HttpClient,
     private route: ActivatedRoute,
     private accountData: AccountDataService) {
 
+
+
+  }
+
+  ngAfterViewChecked() {
     const title = +this.route.snapshot.paramMap.get('title');
-   this.getCourse(0);
-   this.getItems(0);
+    this.getCourse(0);
+    this.getItems(0);
+
+//    this.getAccountFromAPI();
+
+  }
+
+  ngOnInit() {
 
   }
 
   getCourse(index) {
-    this.accountData.getCourseAtIndex(index)
-        .subscribe(course => this.course = course);
-  }
+   this.accountData.getCourseAtIndex(index)
+       .subscribe(course => this.course = course);
+ }
 
   getItems(index) {
     this.accountData.getCourseAtIndexItems(index)
@@ -39,9 +52,15 @@ export class CourseComponent implements OnInit {
     this.accountData.addCourseItem(this.course);
   }
 
-  ngOnInit() {
+  /*
+  getAccountFromAPI
 
-    //this.accountData.update();
+  Function that performs API request and fills account object with result.
+  */
+  getAccountFromAPI(): void {
+      this.http.get(this.accountData.apiRootURL + '/account/?user=seb').subscribe(data => {
+      //   this.accountData.constructAccount(data); // Result of request stored in AccountData account object.
+      });
   }
 
 
