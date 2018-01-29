@@ -19,10 +19,4 @@ export class AppComponent {
       this.accountData.getAccount();
     }
 
-
-  ngAfterViewChecked() {
-
-    //this.accountData.update();
-  }
-
 }

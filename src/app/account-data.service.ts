@@ -82,14 +82,13 @@ export class AccountDataService {
       institutionName: 'University of Newcastle',
       courses: [this.course1,this.course2,this.course3]
 
+};
 
 
     constructor(private http: HttpClient) {
 
     }
 
-
-<
 
 
     constructAccount(jsonObject): Account {

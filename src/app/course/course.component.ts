@@ -25,15 +25,17 @@ export class CourseComponent implements OnInit {
   }
 
   ngAfterViewChecked() {
-    const title = +this.route.snapshot.paramMap.get('title');
-    this.getCourse(0);
-    this.getItems(0);
+
 
 //    this.getAccountFromAPI();
 
   }
 
   ngOnInit() {
+
+    const title = +this.route.snapshot.paramMap.get('title');
+    this.getCourse(0);
+    this.getItems(0);
 
   }
 
