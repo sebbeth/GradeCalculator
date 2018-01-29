@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AccountDataService } from './account-data.service';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,14 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'app';
 
+  constructor(private accountData: AccountDataService) { }
 
+
+  ngAfterViewChecked() {
+
+      //this.accountData.update();
+      this.accountData.getAccount();
+    }
 
 
 }

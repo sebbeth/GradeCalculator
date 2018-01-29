@@ -18,7 +18,6 @@ export class AccountComponent implements OnInit {
 
   ngOnInit() {
     this.getAccount();
-  //  this.getAccountFromAPI();
   }
 
 
@@ -27,19 +26,5 @@ export class AccountComponent implements OnInit {
         .subscribe(account => this.account = account);
   }
 
-
-
-
-
-
-/*
-getAccountFromAPI
-Function that performs API request and fills account object with result.
-*/
-getAccountFromAPI(): void {
-    //this.http.get(this.accountData.apiRootURL + '/account/?user=seb').subscribe(data => {
-      // this.account = this.accountData.constructAccount(data); // Result of request stored in AccountData account object.
-    //});
-}
 
 }

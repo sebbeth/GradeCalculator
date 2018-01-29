@@ -1,12 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import {Account} from '../account';
-import {Course} from '../course';
-import {Blerp} from '../blerp';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-
+import { Component, OnInit, Input} from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+import { Account } from '../account';
+import { Course } from '../course';
 import { CourseSummaryComponent } from './course-summary/course-summary.component';
-
 import { AccountDataService } from '../account-data.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,9 +15,6 @@ import { AccountDataService } from '../account-data.service';
 export class DashboardComponent implements OnInit {
 
   account: Account;
-
-  array: Blerp[];
-  testVal: string;
 
   showCompleted: boolean;
 
