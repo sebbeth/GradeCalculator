@@ -17,7 +17,6 @@ export class CourseComponent implements OnInit {
   courseItems: CourseItem[];
 
   constructor(
-    private http: HttpClient,
     private route: ActivatedRoute,
     private accountData: AccountDataService) {
 
@@ -51,18 +50,6 @@ export class CourseComponent implements OnInit {
   addItem() {
     this.accountData.addCourseItem(this.course);
   }
-
-  /*
-  getAccountFromAPI
-
-  Function that performs API request and fills account object with result.
-  */
-  getAccountFromAPI(): void {
-      this.http.get(this.accountData.apiRootURL + '/account/?user=seb').subscribe(data => {
-      //   this.accountData.constructAccount(data); // Result of request stored in AccountData account object.
-      });
-  }
-
 
 
 
