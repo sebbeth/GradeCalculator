@@ -2,21 +2,21 @@
 
 <div class="jumbotron">
   <div>
-  <h1 class="display-4 inlineEdit">{{account.fullname}}</h1> <button class="btn btn-link"  data-toggle="modal" data-target="#exampleModalCenter">Edit</button>
-</div>
-<div>
-  <p class="lead inlineEdit">{{account.institutionName}}</p> <button class="btn btn-link" >Edit</button>
-</div>
-<div>
-  <p class="inlineEdit">Program: {{account.program}}</p> <button class="btn btn-link" >Edit</button>
-</div>
-<div>
-  <p class="inlineEdit">Email: {{account.email}}</p> <button class="btn btn-link" >Edit</button>
-</div>
+    <h1 class="display-4 inlineEdit">{{account.fullname}}</h1> <button class="btn btn-link" data-toggle="modal" data-target="#nameEditModel">Edit</button>
+  </div>
+  <div>
+    <p class="lead inlineEdit">{{account.institutionName}}</p> <button class="btn btn-link" data-toggle="modal" data-target="#institutionEditModel">Edit</button>
+  </div>
+  <div>
+    <p class="inlineEdit">Program: {{account.program}}</p> <button class="btn btn-link" data-toggle="modal" data-target="#programEditModel">Edit</button>
+  </div>
+  <div>
+    <p class="inlineEdit">Email: {{account.email}}</p> <button class="btn btn-link" data-toggle="modal" data-target="#emailEditModel">Edit</button>
+  </div>
   <hr class="my-4">
   <p>
-    <a class="btn btn-danger" href="#" role="button">Delete account</a>
-    <a class="btn btn-outline-danger" href="#" role="button">Reset Password</a>
+    <a class="btn btn-danger" href="#" role="button" data-toggle="modal" data-target="#deleteModel">Delete account</a>
+    <a class="btn btn-outline-danger" href="#" role="button" data-toggle="modal" data-target="#resetModel">Reset Password</a>
 
   </p>
 
@@ -26,23 +26,166 @@
 </div>
 
 
+<!-- Bootstrap modals, one for each data field on this page -->
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<!-- Name edit Modal -->
+<div class="modal fade" id="nameEditModel" tabindex="-1" role="dialog" aria-labelledby="title" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <h5 class="modal-title" id="title">Edit your name</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        ...
+        <form>
+          <input [(ngModel)]="account.fullname" name="fullname" type="text" class="form-control" required #fullname="ngModel">
+        </form>
+
+        <div *ngIf="fullname.invalid && (fullname.dirty || fullname.touched)" class="alert alert-danger">
+          <div *ngIf="fullname.errors.required">
+          <p>Name is required.</p>
+          </div>
+      </div>
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary" data-dismiss="modal">Save and Close</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Institution edit Modal -->
+<div class="modal fade" id="institutionEditModel" tabindex="-1" role="dialog" aria-labelledby="title" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="title">Change your Institution</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <input [(ngModel)]="account.institutionName" name="institutionName" type="text" class="form-control"  required #institutionName="ngModel">
+        </form>
+
+        <div *ngIf="institutionName.invalid && (institutionName.dirty || institutionName.touched)" class="alert alert-danger">
+          <div *ngIf="institutionName.errors.required">
+          <p>Institution name is required.</p>
+          </div>
+        </div>
+
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Save and Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- program edit Modal -->
+<div class="modal fade" id="programEditModel" tabindex="-1" role="dialog" aria-labelledby="title" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="title">Change your Program</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <input [(ngModel)]="account.program" name="program" type="text" class="form-control" required #program="ngModel">
+        </form>
+
+        <div *ngIf="program.invalid && (program.dirty || program.touched)" class="alert alert-danger">
+          <div *ngIf="program.errors.required">
+          <p>Program name is required.</p>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Save and Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- email edit Modal -->
+<div class="modal fade" id="emailEditModel" tabindex="-1" role="dialog" aria-labelledby="title" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="title">Change your email address</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <input [(ngModel)]="account.email" name="email" type="text" class="form-control" required #email="ngModel">
+        </form>
+
+        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+          <div *ngIf="email.errors.required">
+          <p>Email address is required.</p>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Save and Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!-- Delete account Modal -->
+<div class="modal fade" id="deleteModel" tabindex="-1" role="dialog" aria-labelledby="title" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <p class="modal-title" id="title">Delete your account</p>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>We're sorry to see you go, are you sure that want to delete your accout? to confirm, please type your username '{{account.username}}' into the field below and click delete. </p>
+        <p>This action cannot be undone. </p>
+
+        <form>
+          <input [(ngModel)]="usernameForDelete" name="usernameForDelete" type="text" class="form-control">
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Delete my account forever</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- password reset Modal -->
+<div class="modal fade" id="resetModel" tabindex="-1" role="dialog" aria-labelledby="title" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="title">An email has been sent to your email address containing a password reset link</h5>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Cool, thanks</button>
       </div>
     </div>
   </div>

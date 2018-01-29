@@ -15,6 +15,8 @@ export class AccountComponent implements OnInit {
 
   account: Account;
 
+  usernameForDelete: string;
+
   constructor(private http: HttpClient, private accountData: AccountDataService) { }
 
   ngOnInit() {

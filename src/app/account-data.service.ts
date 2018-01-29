@@ -10,6 +10,14 @@ import {CourseItem} from './course-item';
 import {Blerp} from './blerp';
 
 
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
+
+const apiRootURL = 'http://localhost:80/GradeCalculatorAPI/';
+
+
 /*
 
 This class is the data source for account data.
@@ -89,7 +97,7 @@ export class AccountDataService {
 
 
   constructor(private http: HttpClient) {
-    this.getAccountFromAPI();
+    this.getAccountFromAPI('seb');
 
   }
 
@@ -107,7 +115,6 @@ export class AccountDataService {
       institutionName: jsonObject['institutionName'],
 
     };
-
 
     this.courses = []; // Re-instantiate the courses array
 
@@ -130,8 +137,6 @@ export class AccountDataService {
 
     this.courses.push(newCourse);
 
-
-
   }
 
   return account;
@@ -141,17 +146,61 @@ export class AccountDataService {
 
 
 
+constructCourseItems(jsonObject): void {
+
+
+
+
+
+}
+
+
+// API interface functions
+
 /*
 getAccountFromAPI
-Function that performs API request and fills account object with result.
-*/
-getAccountFromAPI(): void {
+Function that performs API request and fills account object and courses array with result.
+@input user, a string containing the username for user.
 
-  this.http.get('http://localhost:80/GradeCalculatorAPI/account/?user=seb').subscribe(data => {
+Post conditions:
+account object and courses array re-instantiated with data from API.
+*/
+public getAccountFromAPI(user): void {
+
+  this.http.get(apiRootURL + 'account/?user=' + user).subscribe(data => {
     this.account = this.constructAccount(data);
   });
 }
 
+
+/*
+getCourseFromAPI
+Function that performs API request and fills courses array with result.
+@input user, a string containing the username for user.
+@input code, a string containing the course code for course
+
+Post conditions:
+courses array re-instantiated with data from API.
+*/
+public getCourseItemsFromAPI(user,code): void {
+
+  this.http.get(apiRootURL + 'course/?user=' + user + '&code=' + code).subscribe(data => {
+    this.constructCourseItems(data);
+  });
+}
+
+
+
+/*
+*/
+public sendAccountToAPI(user): void {
+
+
+  let data = 'string';
+
+  this.http.put(apiRootURL + 'course/?user=' + user, data,httpOptions);
+
+}
 
 getAccount(): Observable<Account> {
   return of(this.account);
@@ -170,8 +219,6 @@ getCourseAtIndex(index): Observable<Course> {
 
 
 getCourseWithCode(code):Observable<Course> {
-  console.log('OUT ' + code);
-
   let output: Course;
 
   if (this.courses != null) {
@@ -182,10 +229,7 @@ getCourseWithCode(code):Observable<Course> {
       }
     }
   }
-
   return of(output);
-
-
 }
 
 
@@ -193,56 +237,6 @@ getCourseAtIndexItems(index):Observable<CourseItem[]> {
 
   return of(this.courses[index].courseItems);
 }
-
-
-
-/*
-
-constructAccount(jsonObject): Account {
-
-
-var newAccount: Account = {
-username: jsonObject['username'],
-fullname: jsonObject['fullname'],
-unitsCompleted: jsonObject['unitsCompleted'],
-GPA: jsonObject['GPA'],
-program: jsonObject['program'],
-email: jsonObject['email'],
-institutionName: jsonObject['institutionName'],
-courses: new Array<Course>()
-};
-
-
-
-for (let course of jsonObject['courses']) {
-
-var newCourse: Course = {
-id:0,
-title: course.title,
-code: course.code,
-currentPercent: course.currentPercent,
-currentGrade: course.currentGrade,
-percentMarked: course.percentMarked,
-finished: course.finished,
-courseItems:null,
-courseItemsWeightingChecksum: 1
-};
-
-newAccount.courses.push(newCourse);
-
-
-
-}
-
-
-//this.account = newAccount;
-//  this.courses = newAccount.courses;
-return newAccount;
-
-}
-*/
-
-
 
 
 addCourseItem(parentCourse): void {
