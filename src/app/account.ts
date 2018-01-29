@@ -10,7 +10,6 @@ export class Account {
   program: string;
   GPA: number;
   institutionName: string;
-  courses: Course[];
   
 
 }

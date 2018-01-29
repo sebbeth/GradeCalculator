@@ -1,4 +1,5 @@
 import { Component, OnInit, Input} from '@angular/core';
+import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Course } from '../course';
@@ -18,7 +19,9 @@ export class CourseComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private accountData: AccountDataService) {
+    private accountData: AccountDataService,
+    private location: Location,
+  private router: Router) {
 
 
 
@@ -33,14 +36,18 @@ export class CourseComponent implements OnInit {
 
   ngOnInit() {
 
-    const title = +this.route.snapshot.paramMap.get('title');
-    this.getCourse(0);
+    console.log(this.router.url);
+    this.getCourse();
     this.getItems(0);
 
   }
 
-  getCourse(index) {
-   this.accountData.getCourseAtIndex(index)
+  getCourse() {
+
+    let courseTitleParam = this.router.url.replace('/course/','');
+    console.log('title ' + courseTitleParam);
+
+   this.accountData.getCourseWithCode(courseTitleParam)
        .subscribe(course => this.course = course);
  }
 

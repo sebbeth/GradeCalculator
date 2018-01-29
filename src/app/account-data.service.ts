@@ -68,109 +68,36 @@ export class AccountDataService {
     finished: true,
     courseItems:null,
     courseItemsWeightingChecksum: 1
-};
+  };
 
 
 
-    account: Account = {
-      username: 'user',
-      fullname: '[MOCK] Test Student',
-      unitsCompleted: 100,
-      GPA: 5.1,
-      email: 'test@email.com',
-      program: 'Bachelor of Testing',
-      institutionName: 'University of Newcastle',
-      courses: [this.course1,this.course2,this.course3]
+  account: Account = {
+    username: 'user',
+    fullname: '[MOCK] Test Student',
+    unitsCompleted: 100,
+    GPA: 5.1,
+    email: 'test@email.com',
+    program: 'Bachelor of Testing',
+    institutionName: 'University of Newcastle',
 
-};
+  };
 
 
-    constructor(private http: HttpClient) {
-
-    }
+  courses: Course[] = [this.course1,this.course2,this.course3];
 
 
 
-    constructAccount(jsonObject): Account {
-
-      var account: Account = {
-        username: jsonObject['username'],
-        fullname: jsonObject['fullname'],
-        unitsCompleted: jsonObject['unitsCompleted'],
-        GPA: jsonObject['GPA'],
-        program: jsonObject['program'],
-        email: jsonObject['email'],
-        institutionName: jsonObject['institutionName'],
-        courses: [this.course1,this.course2,this.course3]
-
-      };
-
-      return account;
-
-    }
-
-
-
-
-    /*
-    getAccountFromAPI
-    Function that performs API request and fills account object with result.
-    */
-    getAccountFromAPI(): void {
-
-        this.http.get('http://localhost:80/GradeCalculatorAPI/account/?user=seb').subscribe(data => {
-           this.account = this.constructAccount(data);
-        });
-    }
-
-
-  getAccount(): Observable<Account> {
+  constructor(private http: HttpClient) {
     this.getAccountFromAPI();
-    return of(this.account);
-  }
-
-  getCourses(): Observable<Course[]> {
-
-    return of(this.account.courses);
-  }
-
-  getCourseAtIndex(index): Observable<Course> {
-
-      return of(this.account.courses[index]);
-    }
-
-
-/*
-  getCourseWithCode(code):Observable<Course> {
-    console.log('OUT ' + code);
-
-    if (this.courses != null) {
-    for (let course of this.courses) {
-
-      if (course.code == code) {
-        return of(course);
-      }
-    }
-  }
-
-
 
   }
-    */
-
-  getCourseAtIndexItems(index):Observable<CourseItem[]> {
-
-    return of(this.account.courses[index].courseItems);
-  }
 
 
-
-/*
 
   constructAccount(jsonObject): Account {
 
-
-      var newAccount: Account = {
+    var account: Account = {
       username: jsonObject['username'],
       fullname: jsonObject['fullname'],
       unitsCompleted: jsonObject['unitsCompleted'],
@@ -178,99 +105,203 @@ export class AccountDataService {
       program: jsonObject['program'],
       email: jsonObject['email'],
       institutionName: jsonObject['institutionName'],
-      courses: new Array<Course>()
+
     };
 
 
+    this.courses = []; // Re-instantiate the courses array
 
+    // Get courses from request
     for (let course of jsonObject['courses']) {
 
-        var newCourse: Course = {
-          id:0,
-          title: course.title,
-          code: course.code,
-          currentPercent: course.currentPercent,
-          currentGrade: course.currentGrade,
-          percentMarked: course.percentMarked,
-          finished: course.finished,
-          courseItems:null,
-          courseItemsWeightingChecksum: 1
-        };
+    console.log(course.title);
 
-        newAccount.courses.push(newCourse);
+    var newCourse: Course = {
+      id:0,
+      title: course.title,
+      code: course.code,
+      currentPercent: course.currentPercent,
+      currentGrade: course.currentGrade,
+      percentMarked: course.percentMarked,
+      finished: course.finished,
+      courseItems:[this.a,this.b],
+      courseItemsWeightingChecksum: 1
+    };
 
-
-
-    }
+    this.courses.push(newCourse);
 
 
-    //this.account = newAccount;
-  //  this.courses = newAccount.courses;
-    return newAccount;
 
   }
+
+  return account;
+
+}
+
+
+
+
+/*
+getAccountFromAPI
+Function that performs API request and fills account object with result.
+*/
+getAccountFromAPI(): void {
+
+  this.http.get('http://localhost:80/GradeCalculatorAPI/account/?user=seb').subscribe(data => {
+    this.account = this.constructAccount(data);
+  });
+}
+
+
+getAccount(): Observable<Account> {
+  return of(this.account);
+}
+
+getCourses(): Observable<Course[]> {
+
+  return of(this.courses);
+}
+
+getCourseAtIndex(index): Observable<Course> {
+
+  return of(this.courses[index]);
+}
+
+
+
+getCourseWithCode(code):Observable<Course> {
+  console.log('OUT ' + code);
+
+  let output: Course;
+
+  if (this.courses != null) {
+    for (let course of this.courses) {
+
+      if (course.code == code) {
+        output = course;
+      }
+    }
+  }
+
+  return of(output);
+
+
+}
+
+
+getCourseAtIndexItems(index):Observable<CourseItem[]> {
+
+  return of(this.courses[index].courseItems);
+}
+
+
+
+/*
+
+constructAccount(jsonObject): Account {
+
+
+var newAccount: Account = {
+username: jsonObject['username'],
+fullname: jsonObject['fullname'],
+unitsCompleted: jsonObject['unitsCompleted'],
+GPA: jsonObject['GPA'],
+program: jsonObject['program'],
+email: jsonObject['email'],
+institutionName: jsonObject['institutionName'],
+courses: new Array<Course>()
+};
+
+
+
+for (let course of jsonObject['courses']) {
+
+var newCourse: Course = {
+id:0,
+title: course.title,
+code: course.code,
+currentPercent: course.currentPercent,
+currentGrade: course.currentGrade,
+percentMarked: course.percentMarked,
+finished: course.finished,
+courseItems:null,
+courseItemsWeightingChecksum: 1
+};
+
+newAccount.courses.push(newCourse);
+
+
+
+}
+
+
+//this.account = newAccount;
+//  this.courses = newAccount.courses;
+return newAccount;
+
+}
 */
 
 
 
 
-  addCourseItem(parentCourse): void {
+addCourseItem(parentCourse): void {
 
-    let item: CourseItem = {
+  let item: CourseItem = {
 
-      title: 'New Assessment Item',
-      weighting: 0,
-      possibleMark: 0,
-      minimumMark: null,
-      neededMark: null,
-      markRecieved: null,
-      type: 'Assignment'
-
-    }
-
-    parentCourse.courseItems.push(item);
-
-
+    title: 'New Assessment Item',
+    weighting: 0,
+    possibleMark: 0,
+    minimumMark: null,
+    neededMark: null,
+    markRecieved: null,
+    type: 'Assignment'
 
   }
 
-  deleteCourseItem(item,course): void {
-    // Pop the item from the courseItems array
-    var index = course.courseItems.indexOf(item, 0);
-    if (index > -1) {
-      course.courseItems.splice(index, 1);
-    }
+  parentCourse.courseItems.push(item);
+
+
+
+}
+
+deleteCourseItem(item,course): void {
+  // Pop the item from the courseItems array
+  var index = course.courseItems.indexOf(item, 0);
+  if (index > -1) {
+    course.courseItems.splice(index, 1);
+  }
+}
+
+copyCourseItem(item,course): void {
+
+  let newItem: CourseItem = {
+
+    title: item.title,
+    weighting: item.weighting,
+    possibleMark: item.possibleMark,
+    minimumMark: item.minimumMark,
+    neededMark: null, // Note, this is not copied.
+    markRecieved: null, // Note, this is not copied.
+    type: 'Assignment'
   }
 
-  copyCourseItem(item,course): void {
+  course.courseItems.push(newItem);
 
-    let newItem: CourseItem = {
+  course.courseItems.sort(this.courseItemComparison);
 
-      title: item.title,
-      weighting: item.weighting,
-      possibleMark: item.possibleMark,
-      minimumMark: item.minimumMark,
-      neededMark: null, // Note, this is not copied.
-      markRecieved: null, // Note, this is not copied.
-      type: 'Assignment'
-    }
-
-    course.courseItems.push(newItem);
-
-    course.courseItems.sort(this.courseItemComparison);
-
-  }
+}
 
 
-  /*
-  update()
-  A function that, when called, recalculates all derived data values.
-  This is where grades are calculated.
-  */
-  update() {
+/*
+update()
+A function that, when called, recalculates all derived data values.
+This is where grades are calculated.
+*/
+update() {
 
-    if (this.account.courses != null ) {
-    for (let course of this.account.courses) {
+  if (this.courses != null ) {
+    for (let course of this.courses) {
 
       let totalWeightedResults = 0;
       let courseItemWeightingSum = 0;
@@ -297,21 +328,21 @@ export class AccountDataService {
       course.percentMarked = percentMarkedCounter;
     }
   }
+}
+
+
+
+/*
+A helper function used to determine .sort()'s output
+*/
+courseItemComparison(a,b) {
+  if (a.weighting > b.weighting) {
+    return -1;
   }
-
-
-
-  /*
-  A helper function used to determine .sort()'s output
-  */
-  courseItemComparison(a,b) {
-    if (a.weighting > b.weighting) {
-      return -1;
-    }
-    if (a.weighting < b.weighting) {
-      return 1;
-    }
-    return 0;
+  if (a.weighting < b.weighting) {
+    return 1;
   }
+  return 0;
+}
 
 }
