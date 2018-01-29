@@ -4,7 +4,7 @@ import { Location } from '@angular/common';
 import { Account } from '../account';
 import { AccountDataService } from '../account-data.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {dataHelper} from '../data-helper';
+
 
 @Component({
   selector: 'app-account',
@@ -19,8 +19,6 @@ export class AccountComponent implements OnInit {
 
   ngOnInit() {
     this.getAccount();
-  //  this.getAccountFromAPI();
-
   }
 
 
@@ -28,23 +26,4 @@ export class AccountComponent implements OnInit {
     this.accountData.getAccount()
         .subscribe(account => this.account = account);
   }
-
-
-
-
-
-
-/*
-getAccountFromAPI
-
-Function that performs API request and fills account object with result.
-*/
-getAccountFromAPI(): void {
-    this.http.get(this.accountData.apiRootURL + '/account/?user=seb').subscribe(data => {
-    //   this.account = this.accountData.constructAccount(data); // Result of request stored in AccountData account object.
-    });
-}
-
-
-
 }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AccountDataService } from './account-data.service';
-import * as $ from 'jquery';
+
 
 @Component({
   selector: 'app-root',
@@ -12,6 +12,12 @@ export class AppComponent {
 
   constructor(private accountData: AccountDataService) { }
 
+
+  ngAfterViewChecked() {
+
+      //this.accountData.update();
+      this.accountData.getAccount();
+    }
 
 
   ngAfterViewChecked() {

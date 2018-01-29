@@ -1,12 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import {Account} from '../account';
-import {Course} from '../course';
-import {Blerp} from '../blerp';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-
+import { Component, OnInit, Input} from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+import { Account } from '../account';
+import { Course } from '../course';
 import { CourseSummaryComponent } from './course-summary/course-summary.component';
-
 import { AccountDataService } from '../account-data.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,6 +15,7 @@ import { AccountDataService } from '../account-data.service';
 export class DashboardComponent implements OnInit {
 
   account: Account;
+
   showCompleted: boolean;
   courses: Course[];
 
@@ -24,19 +24,12 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.showCompleted = false; //TODO make this work
-
-
-  //  this.getAccountFromAPI();
-
-
-
     this.getAccount();
     this.getCourses();
-
-
+   
   }
 
-
+  
   getAccount(): void {
     this.accountData.getAccount()
         .subscribe(account => this.account = account);
@@ -46,19 +39,4 @@ export class DashboardComponent implements OnInit {
     this.accountData.getCourses()
         .subscribe(courses => this.courses = courses);
   }
-
-
-
-    /*
-    getAccountFromAPI
-
-    Function that performs API request and fills account object with result.
-    */
-    getAccountFromAPI(): void {
-        this.http.get(this.accountData.apiRootURL + '/account/?user=seb').subscribe(data => {
-    //      this.account = this.accountData.constructAccount(data); // Result of request stored in AccountData account object.
-        });
-    }
-
-
 }

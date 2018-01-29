@@ -71,18 +71,16 @@ export class AccountDataService {
 };
 
 
-account: Account = {
-  username: 'user',
-  fullname: 'Sebastian Brown [MOCK]',
-  unitsCompleted: 100,
-  GPA: 6.1,
-  program: 'Batchelor of Engineering (Software)',
-  email: 'seb@email.com',
-  institutionName: 'University of Newcastle',
-  courses: [this.course1,this.course2,this.course3]
 
-};
-
+    account: Account = {
+      username: 'user',
+      fullname: '[MOCK] Test Student',
+      unitsCompleted: 100,
+      GPA: 5.1,
+      email: 'test@email.com',
+      program: 'Bachelor of Testing',
+      institutionName: 'University of Newcastle',
+      courses: [this.course1,this.course2,this.course3]
 
 
 
@@ -91,10 +89,44 @@ account: Account = {
     }
 
 
+<
+
+
+    constructAccount(jsonObject): Account {
+
+      var account: Account = {
+        username: jsonObject['username'],
+        fullname: jsonObject['fullname'],
+        unitsCompleted: jsonObject['unitsCompleted'],
+        GPA: jsonObject['GPA'],
+        program: jsonObject['program'],
+        email: jsonObject['email'],
+        institutionName: jsonObject['institutionName'],
+        courses: [this.course1,this.course2,this.course3]
+
+      };
+
+      return account;
+
+    }
+
+
+
+
+    /*
+    getAccountFromAPI
+    Function that performs API request and fills account object with result.
+    */
+    getAccountFromAPI(): void {
+
+        this.http.get('http://localhost:80/GradeCalculatorAPI/account/?user=seb').subscribe(data => {
+           this.account = this.constructAccount(data);
+        });
+    }
 
 
   getAccount(): Observable<Account> {
-
+    this.getAccountFromAPI();
     return of(this.account);
   }
 
