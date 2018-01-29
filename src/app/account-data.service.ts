@@ -74,9 +74,11 @@ export class AccountDataService {
 
     account: Account = {
       username: 'user',
-      fullname: 'Test Student',
+      fullname: '[MOCK] Test Student',
       unitsCompleted: 100,
       GPA: 5.1,
+      email: 'test@email.com',
+      program: 'Bachelor of Testing',
       institutionName: 'University of Newcastle',
       courses: [this.course1,this.course2,this.course3]
 
@@ -189,7 +191,7 @@ export class AccountDataService {
           totalWeightedResults += (courseItem.markRecieved / courseItem.possibleMark) * courseItem.weighting;
         }
         // calculate new weighting checksum
-        courseItemWeightingSum += parseInt(courseItem.weighting);
+        courseItemWeightingSum += Number(courseItem.weighting);
       }
       // set new course grade
       course.currentPercent = totalWeightedResults ;

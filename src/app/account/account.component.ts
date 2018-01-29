@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+import { Account } from '../account';
+import { AccountDataService } from '../account-data.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-account',
@@ -7,9 +12,34 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccountComponent implements OnInit {
 
-  constructor() { }
+  account: Account;
+
+  constructor(private http: HttpClient, private accountData: AccountDataService) { }
 
   ngOnInit() {
+    this.getAccount();
+  //  this.getAccountFromAPI();
   }
+
+
+  getAccount(): void {
+    this.accountData.getAccount()
+        .subscribe(account => this.account = account);
+  }
+
+
+
+
+
+
+/*
+getAccountFromAPI
+Function that performs API request and fills account object with result.
+*/
+getAccountFromAPI(): void {
+    //this.http.get(this.accountData.apiRootURL + '/account/?user=seb').subscribe(data => {
+      // this.account = this.accountData.constructAccount(data); // Result of request stored in AccountData account object.
+    //});
+}
 
 }

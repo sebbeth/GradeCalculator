@@ -35,6 +35,7 @@ export class DashboardComponent implements OnInit {
   }
 
   // Currently disabled,
+  /*
   constructAccount(jsonObject): Account {
 
     this.testVal = jsonObject['username'];
@@ -51,10 +52,11 @@ export class DashboardComponent implements OnInit {
 
     return account;
 
-  }
+  }*/
 
 
   // Currently disabled,
+  /*
   testV(): void {
 
       this.http.get<Account>('http://localhost:80/GradeCalculatorAPI/test.php').subscribe(data => {
@@ -62,6 +64,7 @@ export class DashboardComponent implements OnInit {
          this.account = this.constructAccount(data['0']);
       });
   }
+  */
 
   getAccount(): void {
     this.accountData.getAccount()
