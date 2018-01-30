@@ -88,4 +88,29 @@
       <span> Checksum:{{course.courseItemsWeightingChecksum}}</span> <button (click)="addItem()">Add Assignment</button>
     </div>
   </div>
+
+  <br><br><br>
+  <div class="row justify-content-md-center">
+    <a class="btn btn-outline-danger" href="#" role="button" data-toggle="modal" data-target="#deleteModel">Delete Course</a>
+  </div>
+
+</div>
+
+
+
+
+<!-- Delete course Modal -->
+<div class="modal fade" id="deleteModel" tabindex="-1" role="dialog" aria-labelledby="title" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <p class="modal-title" id="title">Delete this course?</p>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+        <button (click)="deleteCourse()" type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>
+      </div>
+    </div>
+  </div>
 </div>

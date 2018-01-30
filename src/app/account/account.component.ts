@@ -1,5 +1,5 @@
 import { Component, OnInit, Input} from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Account } from '../account';
 import { AccountDataService } from '../account-data.service';
@@ -17,7 +17,7 @@ export class AccountComponent implements OnInit {
 
   usernameForDelete: string;
 
-  constructor(private http: HttpClient, private accountData: AccountDataService) { }
+  constructor(private http: HttpClient, private accountData: AccountDataService,private router: Router) { }
 
   ngOnInit() {
     this.getAccount();
@@ -27,5 +27,11 @@ export class AccountComponent implements OnInit {
   getAccount(): void {
     this.accountData.getAccount()
         .subscribe(account => this.account = account);
+  }
+
+  deleteAccount(): void {
+
+    this.accountData.deleteAccount(this.account);
+    this.router.navigate(['/']);
   }
 }

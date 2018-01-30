@@ -1,6 +1,5 @@
 import { Component, OnInit, Input} from '@angular/core';
-import { Router } from '@angular/router';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Course } from '../course';
 import { CourseItem } from '../course-item';
@@ -46,12 +45,16 @@ export class CourseComponent implements OnInit {
 
   }
 
+  deleteCourse() {
+
+    this.accountData.deleteCourse(this.course);
+    this.router.navigate(['/dashboard']);
+  }
+
   getCourse() {
 
     let courseTitleParam = this.router.url.replace('/course/','');
-    console.log('title ' + courseTitleParam);
-
-   this.accountData.getCourseWithCode(courseTitleParam)
+    this.accountData.getCourseWithCode(courseTitleParam)
        .subscribe(course => this.course = course);
  }
 

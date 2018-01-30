@@ -239,6 +239,15 @@ getCourseAtIndexItems(index):Observable<CourseItem[]> {
 }
 
 
+deleteCourse(toDelete): void {
+  // Pop the item from the courseItems array
+  var index = this.courses.indexOf(toDelete, 0);
+  if (index > -1) {
+    this.courses.splice(index, 1);
+  }
+}
+
+
 addCourseItem(parentCourse): void {
 
   let item: CourseItem = {
@@ -283,6 +292,13 @@ copyCourseItem(item,course): void {
   course.courseItems.push(newItem);
 
   course.courseItems.sort(this.courseItemComparison);
+
+}
+
+deleteAccount(toDelete): void {
+
+this.account = null;
+this.courses = [];
 
 }
 
