@@ -15,12 +15,15 @@ export class CourseSummaryComponent implements OnInit {
 
   cardCss: string;
 
+  percentMarked: string;
+
   constructor() {
   this.cardCss = 'card';
  }
 
   ngOnInit() {
     this.cardCss = 'card';
+    this.percentMarked = String(this.course.percentMarked) + '%';
 
     if (this.course.finished) {
       this.cardCss = 'card border-secondary mb-3';

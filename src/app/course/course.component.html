@@ -22,8 +22,9 @@
   <br><br><br>
   <div class="row justify-content-md-center">
     <div class="col-sm-5">
+      Percent marked
       <div class="progress">
-        <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{course.percentMarked}}% Marked</div>
+        <div class="progress-bar" role="progressbar" [ngStyle]="{'width': percentMarked}" aria-valuenow='0' aria-valuemin="0" aria-valuemax="100">{{course.percentMarked}}%</div>
       </div>
     </div>
   </div>
@@ -32,11 +33,17 @@
 
   <div class="row justify-content-md-center">
     <div class="col-sm-5">
+      Weighting breakdown
       <div class="progress">
-        <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Weighting breakdown</div>
-      </div>
+  <div class="progress-bar" role="progressbar" style="width: 15%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+  <div class="progress-bar bg-success" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+  <div class="progress-bar bg-info" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
     </div>
   </div>
+
+
+
 
   <br><br><br>
 
@@ -44,17 +51,16 @@
     <h3>Current grade</h3>
   </div>
   <div class="row justify-content-md-center">
-    <!-- progress circle from: https://bootsnipp.com/snippets/featured/circle-progress-bar-->
-    <div class="progress-circle blue">
-      <span class="progress-circle-left">
-        <span class="progress-circle-bar"></span>
-      </span>
-      <span class="progress-circle-right">
-        <span class="progress-circle-bar"></span>
-      </span>
-      <div class="progress-circle-value">{{course.currentPercent}}%</div>
-    </div>
-    <!-- /progress circle -->
+    <circle-progress
+    [percent]=course.currentPercent
+    [radius]="100"
+    [outerStrokeWidth]="8"
+    [innerStrokeWidth]="1"
+    [outerStrokeColor]="'#78C000'"
+    [innerStrokeColor]="'#C7E596'"
+    [animation]="true"
+    [animationDuration]="300"
+  ></circle-progress>
   </div>
 
 

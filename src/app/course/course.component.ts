@@ -17,6 +17,8 @@ export class CourseComponent implements OnInit {
   course: Course;
   courseItems: CourseItem[];
 
+  percentMarked: string;
+
   constructor(
     private route: ActivatedRoute,
     private accountData: AccountDataService,
@@ -39,6 +41,8 @@ export class CourseComponent implements OnInit {
     console.log(this.router.url);
     this.getCourse();
     this.getItems(0);
+    this.percentMarked = String(this.course.percentMarked) + '%';
+
 
   }
 

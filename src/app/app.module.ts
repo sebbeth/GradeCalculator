@@ -18,7 +18,7 @@ import { LandingComponent } from './landing/landing.component';
 import { CourseSummaryComponent } from './dashboard/course-summary/course-summary.component';
 import { AccountDataService } from './account-data.service';
 import { CourseItemComponent } from './course/course-item/course-item.component';
-
+import { NgCircleProgressModule } from 'ng-circle-progress'; // From https://github.com/bootsoon/ng-circle-progress
 
 @NgModule({
   declarations: [
@@ -37,7 +37,19 @@ import { CourseItemComponent } from './course/course-item/course-item.component'
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+
+    // Specify ng-circle-progress as an import
+   NgCircleProgressModule.forRoot({
+     // set defaults here
+     radius: 100,
+     outerStrokeWidth: 16,
+     innerStrokeWidth: 8,
+     outerStrokeColor: "#78C000",
+     innerStrokeColor: "#C7E596",
+     animationDuration: 300,
+     showSubtitle: false
+   })
   ],
   providers: [AccountDataService],
   bootstrap: [AppComponent]
