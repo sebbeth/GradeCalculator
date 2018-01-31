@@ -98,6 +98,7 @@ export class AccountDataService {
 
   constructor(private http: HttpClient) {
     this.getAccountFromAPI('seb');
+    this.getCoursesFromAPI('seb');
 
   }
 
@@ -118,29 +119,51 @@ export class AccountDataService {
 
     this.courses = []; // Re-instantiate the courses array
 
-    // Get courses from request
-    for (let course of jsonObject['courses']) {
+    return account;
 
-    console.log(course.title);
+  }
+
+  constructCourses(jsonObject): void {
+
+    this.courses = []; // Re-instantiate the courses array
+
+    // Get courses from request
+    for (let course of jsonObject) {
+
 
     var newCourse: Course = {
-      id:0,
+      id:course.id,
       title: course.title,
       code: course.code,
       currentPercent: course.currentPercent,
       currentGrade: course.currentGrade,
       percentMarked: course.percentMarked,
       finished: course.finished,
-      courseItems:[this.a,this.b],
+      courseItems:[],
       courseItemsWeightingChecksum: 1
     };
+
+    for (let item of course.courseItems) {
+
+      let newItem: CourseItem = {
+
+        title: item.title,
+        weighting: item.weighting,
+        possibleMark: item.possibleMark,
+        minimumMark: item.minimumMark,
+        neededMark: null,
+        markRecieved: item.markRecieved,
+        type: item.type
+      };
+
+      newCourse.courseItems.push(newItem);
+
+    }
+
 
     this.courses.push(newCourse);
 
   }
-
-  return account;
-
 }
 
 
@@ -182,10 +205,10 @@ Function that performs API request and fills courses array with result.
 Post conditions:
 courses array re-instantiated with data from API.
 */
-public getCourseItemsFromAPI(user,code): void {
+public getCoursesFromAPI(user): void {
 
-  this.http.get(apiRootURL + 'course/?user=' + user + '&code=' + code).subscribe(data => {
-    this.constructCourseItems(data);
+  this.http.get(apiRootURL + 'courses/?user=' + user).subscribe(data => {
+    this.constructCourses(data);
   });
 }
 
@@ -226,6 +249,21 @@ getCourseWithCode(code):Observable<Course> {
 
       if (course.code == code) {
         output = course;
+      }
+    }
+  }
+  return of(output);
+}
+
+getCourseItemsForId(courseId):Observable<CourseItem[]> {
+
+  let output: CourseItem;
+
+  if (this.courses != null) {
+    for (let course of this.courses) {
+
+      if (course.id == courseId) {
+        output = course.courseItems;
       }
     }
   }
@@ -297,8 +335,8 @@ copyCourseItem(item,course): void {
 
 deleteAccount(toDelete): void {
 
-this.account = null;
-this.courses = [];
+  this.account = null;
+  this.courses = [];
 
 }
 
