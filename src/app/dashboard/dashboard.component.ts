@@ -1,5 +1,5 @@
 import { Component, OnInit, Input} from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute,Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Account } from '../account';
 import { Course } from '../course';
@@ -26,10 +26,10 @@ export class DashboardComponent implements OnInit {
     this.showCompleted = false; //TODO make this work
     this.getAccount();
     this.getCourses();
-   
+
   }
 
-  
+
   getAccount(): void {
     this.accountData.getAccount()
         .subscribe(account => this.account = account);
@@ -38,5 +38,11 @@ export class DashboardComponent implements OnInit {
   getCourses(): void {
     this.accountData.getCourses()
         .subscribe(courses => this.courses = courses);
+  }
+
+  addCourse(): void {
+
+    this.router.navigateByUrl('/newCourse');
+
   }
 }

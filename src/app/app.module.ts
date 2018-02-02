@@ -18,7 +18,9 @@ import { LandingComponent } from './landing/landing.component';
 import { CourseSummaryComponent } from './dashboard/course-summary/course-summary.component';
 import { AccountDataService } from './account-data.service';
 import { CourseItemComponent } from './course/course-item/course-item.component';
-import { NgCircleProgressModule } from 'ng-circle-progress'; // From https://github.com/bootsoon/ng-circle-progress
+import { NgCircleProgressModule } from 'ng-circle-progress';
+import { NewCourseComponent } from './new-course/new-course.component';
+import { CreateAccountComponent } from './create-account/create-account.component'; // From https://github.com/bootsoon/ng-circle-progress
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { NgCircleProgressModule } from 'ng-circle-progress'; // From https://git
     SupportComponent,
     LandingComponent,
     CourseSummaryComponent,
-    CourseItemComponent
+    CourseItemComponent,
+    NewCourseComponent,
+    CreateAccountComponent
   ],
   imports: [
     BrowserModule,

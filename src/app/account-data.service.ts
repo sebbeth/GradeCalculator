@@ -7,7 +7,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Course} from './course';
 import {Account} from './account';
 import {CourseItem} from './course-item';
-import {Blerp} from './blerp';
 
 
 
@@ -81,6 +80,7 @@ export class AccountDataService {
 
 
   account: Account = {
+    id: 0,
     username: 'user',
     fullname: '[MOCK] Test Student',
     unitsCompleted: 100,
@@ -107,6 +107,7 @@ export class AccountDataService {
   constructAccount(jsonObject): Account {
 
     var account: Account = {
+      id: Number(jsonObject['id']),
       username: jsonObject['username'],
       fullname: jsonObject['fullname'],
       unitsCompleted: jsonObject['unitsCompleted'],
@@ -257,7 +258,7 @@ getCourseWithCode(code):Observable<Course> {
 
 getCourseItemsForId(courseId):Observable<CourseItem[]> {
 
-  let output: CourseItem;
+  let output: CourseItem[];
 
   if (this.courses != null) {
     for (let course of this.courses) {
