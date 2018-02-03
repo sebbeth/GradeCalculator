@@ -19,7 +19,6 @@ import { CourseSummaryComponent } from './dashboard/course-summary/course-summar
 import { AccountDataService } from './account-data.service';
 import { CourseItemComponent } from './course/course-item/course-item.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
-import { NewCourseComponent } from './new-course/new-course.component';
 import { CreateAccountComponent } from './create-account/create-account.component'; // From https://github.com/bootsoon/ng-circle-progress
 
 @NgModule({
@@ -33,7 +32,6 @@ import { CreateAccountComponent } from './create-account/create-account.componen
     LandingComponent,
     CourseSummaryComponent,
     CourseItemComponent,
-    NewCourseComponent,
     CreateAccountComponent
   ],
   imports: [

@@ -18,6 +18,7 @@ export class DashboardComponent implements OnInit {
 
   showCompleted: boolean;
   courses: Course[];
+  newCourseInput: Course;
 
 
   constructor(private http: HttpClient, private accountData: AccountDataService) { }
@@ -26,6 +27,7 @@ export class DashboardComponent implements OnInit {
     this.showCompleted = false; //TODO make this work
     this.getAccount();
     this.getCourses();
+    this.newCourseInput = this.initNewCourse();
 
   }
 
@@ -40,9 +42,33 @@ export class DashboardComponent implements OnInit {
         .subscribe(courses => this.courses = courses);
   }
 
-  addCourse(): void {
+  newCourseButtonPress(): void {
 
-    this.router.navigateByUrl('/newCourse');
+    this.newCourseInput = this.initNewCourse();
 
+
+  }
+
+  addNewCourse(): void {
+
+    this.courses.push(this.newCourseInput);
+  }
+
+
+
+  initNewCourse(): Course {
+
+  let course: Course = {
+      id:null,
+      title: '',
+      code: '',
+      currentPercent: null,
+      currentGrade: null,
+      percentMarked: null,
+      finished: null,
+      courseItems:[],
+      courseItemsWeightingChecksum: null
+    }
+    return course;
   }
 }

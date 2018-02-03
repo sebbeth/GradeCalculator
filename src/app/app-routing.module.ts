@@ -7,7 +7,6 @@ import { AccountComponent }      from './account/account.component';
 import { SetupComponent }      from './setup/setup.component';
 import { SupportComponent }      from './support/support.component';
 import { LandingComponent }      from './landing/landing.component';
-import { NewCourseComponent }            from './new-course/new-course.component';
 import { CreateAccountComponent }            from './create-account/create-account.component';
 
 const routes: Routes = [
@@ -18,7 +17,6 @@ const routes: Routes = [
   { path: 'account', component: AccountComponent },
   { path: 'support', component: SupportComponent },
   { path: 'landing', component: LandingComponent },
-  { path: 'newCourse', component: NewCourseComponent }
   { path: 'new', component: CreateAccountComponent }
 
 
