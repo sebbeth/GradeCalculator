@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
-import { Http } from '@angular/http';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+//import { HttpClient, HttpHeaders } from '@angular/common/http';
+//import { Headers, Response, Http, RequestOptions, URLSearchParams } from "@angular/http"
+import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 
 import {Course} from './course';
 import {Account} from './account';
@@ -11,7 +12,8 @@ import {CourseItem} from './course-item';
 
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
+// headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
 const apiRootURL = 'http://localhost:80/GradeCalculatorAPI/';
@@ -96,9 +98,35 @@ export class AccountDataService {
 
 
 
-  constructor(private http: HttpClient) {
+  constructor( private http: HttpClient) {
     this.getAccountFromAPI('seb');
     this.getCoursesFromAPI('seb');
+
+  }
+
+  public updateAccountToAPI(): void {
+
+    const body = new HttpParams()
+      .set(`id`, '1')
+      .set(`fullname`, 'this is working');
+    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+
+     this.http.post(apiRootURL + 'account/update/', body.toString(), { headers, observe: 'response' });
+
+  /*
+    this.http.put(apiRootURL + 'account/update/', {
+      id:1,
+      fullname:'yeah boiiiiiii'
+    })
+        .subscribe(
+          res => {
+            console.log(res);
+          },
+          err => {
+            console.log("Error occured " + err.status);
+          }
+        );
+        */
 
   }
 
@@ -194,6 +222,14 @@ public getAccountFromAPI(user): void {
   this.http.get(apiRootURL + 'account/?user=' + user).subscribe(data => {
     this.account = this.constructAccount(data);
   });
+}
+
+
+
+public addCourseToAPI(user_id): void {
+
+  this.http.post(apiRootURL + 'account/update/', '', httpOptions);
+
 }
 
 

@@ -34,4 +34,8 @@ export class AccountComponent implements OnInit {
     this.accountData.deleteAccount(this.account);
     this.router.navigate(['/']);
   }
+
+  updateAccount(): void {
+    console.log( this.accountData.updateAccountToAPI());
+  }
 }

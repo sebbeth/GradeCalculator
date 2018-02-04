@@ -5,6 +5,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 //import { ActivatedRoute } from '@angular/router';
 import { FormsModule }   from '@angular/forms';
 import { HttpClientModule }    from '@angular/common/http';
+//import { Headers, Response, Http, RequestOptions, URLSearchParams } from "@angular/http"
+import { ChartsModule } from 'ng2-charts';
 
 
 import { AppComponent } from './app.component';
@@ -19,7 +21,8 @@ import { CourseSummaryComponent } from './dashboard/course-summary/course-summar
 import { AccountDataService } from './account-data.service';
 import { CourseItemComponent } from './course/course-item/course-item.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
-import { CreateAccountComponent } from './create-account/create-account.component'; // From https://github.com/bootsoon/ng-circle-progress
+import { CreateAccountComponent } from './create-account/create-account.component';
+import { PieChartComponent } from './course/pie-chart/pie-chart.component'; // From https://github.com/bootsoon/ng-circle-progress
 
 @NgModule({
   declarations: [
@@ -32,13 +35,15 @@ import { CreateAccountComponent } from './create-account/create-account.componen
     LandingComponent,
     CourseSummaryComponent,
     CourseItemComponent,
-    CreateAccountComponent
+    CreateAccountComponent,
+    PieChartComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    ChartsModule,
     NgbModule.forRoot(),
 
     // Specify ng-circle-progress as an import
