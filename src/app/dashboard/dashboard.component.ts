@@ -19,6 +19,7 @@ export class DashboardComponent implements OnInit {
   showCompleted: boolean;
   courses: Course[];
   newCourseInput: Course;
+  noCourses: boolean;
 
 
   constructor(private http: HttpClient, private accountData: AccountDataService) { }
@@ -28,7 +29,10 @@ export class DashboardComponent implements OnInit {
     this.getAccount();
     this.getCourses();
     this.newCourseInput = this.initNewCourse();
-
+    noCourses = false;
+    if (courses.length == 0) {
+      noCourses = true;
+    }
   }
 
 
