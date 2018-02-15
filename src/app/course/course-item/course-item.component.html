@@ -1,6 +1,6 @@
 <!-- Item information view -->
 <div *ngIf="!editItem" class="row justify-content-md-center ">
-  <div class="col-sm-5 bg-light taskSummaryContainer">
+  <div class="col-sm taskSummaryContainer">
     <div class="row">
       <div class="col-sm-8">
         <h3>{{courseItem.title}}</h3>
@@ -16,10 +16,10 @@
   <div class="col-sm-2 text-center markCell" style="background-color:green;">
     <span>{{courseItem.neededMark}} / {{courseItem.possibleMark}}</span>
   </div>
-  <div class="col-sm-2 text-center bg-light markCell">
+  <div class="col-sm-2 text-center markCell">
 
   <form #markRecievedForm="ngForm">
-  <div class="col-sm-10 text-center bg-light markCell">
+  <div class="col-sm-10 text-center markCell">
         <input (keyup)="onMarkRecievedKeyUp($event)" [(ngModel)]="courseItem.markRecieved" name="markRecieved" type="text" class="form-control" id="title"> <span>/ {{courseItem.possibleMark}}</span>
   </div>
   </form>
@@ -27,8 +27,8 @@
 </div>
 
 <!-- Item edit view -->
-<div  *ngIf="editItem" class="row justify-content-md-center">
-  <div class="col-sm-9 bg-light taskSummaryContainer">
+<div  *ngIf="editItem" class="row justify-content-md-center ">
+  <div class="col-sm  taskSummaryContainer">
     <form #editItemForm="ngForm">
 
 
@@ -69,3 +69,4 @@
     </form>
   </div>
 </div>
+<hr />

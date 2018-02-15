@@ -1,4 +1,20 @@
 
+
+
+
+.courseItemsDiv {
+   overflow: scroll;
+}
+
+.itemsTableHeader {
+background-color: green;
+
+}
+
+
+
+
+
 /*
 progress circle from: https://bootsnipp.com/snippets/featured/circle-progress-bar
 */

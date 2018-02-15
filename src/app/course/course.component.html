@@ -70,26 +70,34 @@
 
   <!-- Header row -->
     <h2>Assessment Items:</h2>
-  <div class="row justify-content-md-center">
-    <div class="col-sm-5 bg-info" style="padding:25px;">
-    </div>
-    <div class="col-sm-2 bg-info text-center" style="padding:15px;">
-      <span>Mark needed to pass</span>
-    </div>
-    <div class="col-sm-2 bg-info text-center" style="padding:15px;">
-      <span>My mark</span>
-    </div>
-  </div>
+    <br><br>
 
-  <div *ngFor="let courseItem of courseItems">
-    <app-course-item [courseItem]="courseItem" [course]="course"></app-course-item>
-  </div>
-
-  <div class="row justify-content-md-center">
-    <div class="col-sm-9 bg-info text-center" style="padding:25px;">
-      <span> Checksum:{{course.courseItemsWeightingChecksum}}</span> <button (click)="addItem()">Add Assignment</button>
-    </div>
-  </div>
+      <div class="card">
+        <div class="card-header">
+          <div class="row justify-content-md-center">
+            <div class="col-sm">
+            </div>
+            <div class="col-sm-2 text-center">
+              <span>Mark needed to pass</span>
+            </div>
+            <div class="col-sm-2 text-center">
+              <span>My mark</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body mh-100 courseItemsDiv">
+          <div *ngFor="let courseItem of courseItems">
+            <app-course-item [courseItem]="courseItem" [course]="course"></app-course-item>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="row justify-content-md-center">
+            <div class="col-sm-9 text-center">
+              <span> Checksum:{{course.courseItemsWeightingChecksum}}</span> <button class="btn btn-primary" (click)="addItem()">Add Assignment</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
   <br><br><br>
   <div class="row justify-content-md-center">
