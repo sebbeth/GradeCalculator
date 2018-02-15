@@ -1,103 +1,102 @@
 
 <div class="container">
 
-<br>
-<br>
+  <br>
+  <br>
   <div class="row">
-    <h2>{{course.code}}</h2>
-
+    <h2 class="display-4 inlineEdit">{{course.code}}</h2> <button class="btn btn-link" data-toggle="modal" data-target="#codeEditModal">Edit</button>
   </div>
   <div class="row">
-    <h3>{{course.title}}</h3>
-  </div>
-
-  <app-pie-chart></app-pie-chart>
-
-  <div class="row justify-content-md-center">
-    <span>Pie chart of content marked</span>
+    <h3 class="display-6 inlineEdit">{{course.title}}</h3> <button class="btn btn-link" data-toggle="modal" data-target="#titleEditModal">Edit</button>
   </div>
   <br><br><br>
 
-
-
-
-  <br><br><br>
   <div class="row justify-content-md-center">
-    <div class="col-sm-5">
-      Percent marked
-      <div class="progress">
-        <div class="progress-bar" role="progressbar" [ngStyle]="{'width': percentMarked}" aria-valuenow='0' aria-valuemin="0" aria-valuemax="100">{{course.percentMarked}}%</div>
+    <div class="col-sm-4">
+      <div class="card text-center">
+        <div class="card-header">
+          <h4>Current grade</h4>
+        </div>
+        <div class="card-body">
+        <circle-progress
+        [percent]=course.currentPercent
+        [radius]="100"
+        [outerStrokeWidth]="8"
+        [innerStrokeWidth]="1"
+        [outerStrokeColor]="'#78C000'"
+        [innerStrokeColor]="'#C7E596'"
+        [animation]="true"
+        [animationDuration]="300"
+        ></circle-progress>
+      </div>
       </div>
     </div>
-  </div>
-
-  <br><br><br>
-
-  <div class="row justify-content-md-center">
-    <div class="col-sm-5">
-      Weighting breakdown
-      <div class="progress">
-  <div class="progress-bar" role="progressbar" style="width: 15%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
-  <div class="progress-bar bg-success" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-  <div class="progress-bar bg-info" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-</div>
+    <div class="col-sm-4">
+      <div class="card text-center h-100">
+        <div class="card-header">
+        <h3>Pie chart of marks</h3>
+      </div>
+      <div class="card-body ">
+        <app-pie-chart></app-pie-chart>
+      </div>
+    </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="card text-center">
+        <div class="card-header">
+        <h3>Percent Marked</h3>
+      </div>
+      <div class="card-body">
+        <circle-progress
+        [percent]=course.percentMarked
+        [radius]="100"
+        [outerStrokeWidth]="8"
+        [innerStrokeWidth]="1"
+        [outerStrokeColor]="'#ff704d'"
+        [innerStrokeColor]="'#ff704d'"
+        [animation]="true"
+        [animationDuration]="300"
+        ></circle-progress>
+      </div>
+    </div>
     </div>
   </div>
 
 
 
-
   <br><br><br>
-
-  <div class="row justify-content-md-center">
-    <h3>Current grade</h3>
-  </div>
-  <div class="row justify-content-md-center">
-    <circle-progress
-    [percent]=course.currentPercent
-    [radius]="100"
-    [outerStrokeWidth]="8"
-    [innerStrokeWidth]="1"
-    [outerStrokeColor]="'#78C000'"
-    [innerStrokeColor]="'#C7E596'"
-    [animation]="true"
-    [animationDuration]="300"
-  ></circle-progress>
-  </div>
-
-
 
 
   <!-- Header row -->
-    <h2>Assessment Items:</h2>
-    <br><br>
+  <h2>Assessment Items:</h2>
+  <br><br>
 
-      <div class="card">
-        <div class="card-header">
-          <div class="row justify-content-md-center">
-            <div class="col-sm">
-            </div>
-            <div class="col-sm-2 text-center">
-              <span>Mark needed to pass</span>
-            </div>
-            <div class="col-sm-2 text-center">
-              <span>My mark</span>
-            </div>
-          </div>
+  <div class="card">
+    <div class="card-header">
+      <div class="row justify-content-md-center">
+        <div class="col-sm">
         </div>
-        <div class="card-body mh-100 courseItemsDiv">
-          <div *ngFor="let courseItem of courseItems">
-            <app-course-item [courseItem]="courseItem" [course]="course"></app-course-item>
-          </div>
+        <div class="col-sm-2 text-center">
+          <span>Mark needed to pass</span>
         </div>
-        <div class="card-footer">
-          <div class="row justify-content-md-center">
-            <div class="col-sm-9 text-center">
-              <span> Checksum:{{course.courseItemsWeightingChecksum}}</span> <button class="btn btn-primary" (click)="addItem()">Add Assignment</button>
-            </div>
-          </div>
+        <div class="col-sm-2 text-center">
+          <span>My mark</span>
         </div>
       </div>
+    </div>
+    <div class="card-body mh-100 courseItemsDiv">
+      <div *ngFor="let courseItem of courseItems">
+        <app-course-item [courseItem]="courseItem" [course]="course"></app-course-item>
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="row justify-content-md-center">
+        <div class="col-sm-9 text-center">
+          <span> Checksum:{{course.courseItemsWeightingChecksum}}</span> <button class="btn btn-primary" (click)="addItem()">Add Assignment</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <br><br><br>
   <div class="row justify-content-md-center">
@@ -120,6 +119,73 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
         <button (click)="deleteCourse()" type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- Bootstrap modals, one for each data field on this page -->
+
+<!-- Code edit Modal -->
+<div class="modal fade" id="codeEditModal" tabindex="-1" role="dialog" aria-labelledby="code" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="instructions">Edit course code</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <input [(ngModel)]="course.code" name="code" type="text" class="form-control" required #code="ngModel">
+        </form>
+
+        <div *ngIf="code.invalid && (code.dirty || code.touched)" class="alert alert-danger">
+          <div *ngIf="code.errors.required">
+            <p>Code is required.</p>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button (click)="updateCourseDetails()" type="button" class="btn btn-primary" data-dismiss="modal">Save and Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Title edit Modal -->
+<div class="modal fade" id="titleEditModal" tabindex="-1" role="dialog" aria-labelledby="title" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="title">Edit course title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <input [(ngModel)]="course.title" name="title" type="text" class="form-control" required #title="ngModel">
+        </form>
+
+        <div *ngIf="title.invalid && (title.dirty || title.touched)" class="alert alert-danger">
+          <div *ngIf="title.errors.required">
+            <p>Code is required.</p>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button (click)="updateCourseDetails()" type="button" class="btn btn-primary" data-dismiss="modal">Save and Close</button>
       </div>
     </div>
   </div>

@@ -45,6 +45,10 @@ export class CourseComponent implements OnInit {
 
   }
 
+  updateCourseDetails() {
+    
+  }
+
   deleteCourse() {
 
     this.accountData.deleteCourse(this.course);
