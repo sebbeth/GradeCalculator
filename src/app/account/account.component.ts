@@ -2,6 +2,7 @@ import { Component, OnInit, Input} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Account } from '../account';
+import {NavigationComponent} from '../navigation/navigation.component';
 import { AccountDataService } from '../account-data.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 

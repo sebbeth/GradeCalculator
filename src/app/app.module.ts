@@ -22,7 +22,8 @@ import { AccountDataService } from './account-data.service';
 import { CourseItemComponent } from './course/course-item/course-item.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { CreateAccountComponent } from './create-account/create-account.component';
-import { PieChartComponent } from './course/pie-chart/pie-chart.component'; // From https://github.com/bootsoon/ng-circle-progress
+import { PieChartComponent } from './course/pie-chart/pie-chart.component';
+import { NavigationComponent } from './navigation/navigation.component'; // From https://github.com/bootsoon/ng-circle-progress
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { PieChartComponent } from './course/pie-chart/pie-chart.component'; // F
     CourseSummaryComponent,
     CourseItemComponent,
     CreateAccountComponent,
-    PieChartComponent
+    PieChartComponent,
+    NavigationComponent
   ],
   imports: [
     BrowserModule,

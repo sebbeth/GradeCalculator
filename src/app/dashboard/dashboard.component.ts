@@ -3,6 +3,7 @@ import { ActivatedRoute,Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Account } from '../account';
 import { Course } from '../course';
+import {NavigationComponent} from '../navigation/navigation.component';
 import { CourseSummaryComponent } from './course-summary/course-summary.component';
 import { AccountDataService } from '../account-data.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -19,7 +20,6 @@ export class DashboardComponent implements OnInit {
   showCompleted: boolean;
   courses: Course[];
   newCourseInput: Course;
-  noCourses: boolean;
 
 
   constructor(private http: HttpClient, private accountData: AccountDataService) { }
@@ -29,10 +29,6 @@ export class DashboardComponent implements OnInit {
     this.getAccount();
     this.getCourses();
     this.newCourseInput = this.initNewCourse();
-    noCourses = false;
-    if (courses.length == 0) {
-      noCourses = true;
-    }
   }
 
 

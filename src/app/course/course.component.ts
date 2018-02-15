@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Course } from '../course';
 import { CourseItem } from '../course-item';
+import {NavigationComponent} from '../navigation/navigation.component';
 import { AccountDataService } from '../account-data.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -46,7 +47,7 @@ export class CourseComponent implements OnInit {
   }
 
   updateCourseDetails() {
-    
+
   }
 
   deleteCourse() {
