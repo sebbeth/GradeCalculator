@@ -65,7 +65,7 @@ export class AccountDataService {
     code: 'COMP2050',currentPercent: 0,
     currentGrade: 'High Distinction', percentMarked:40,
     finished: false,
-    courseItems:null,
+    courseItems:[],
     courseItemsWeightingChecksum: 1
   };
   course3: Course = {id:2,
@@ -75,7 +75,7 @@ export class AccountDataService {
     currentGrade: 'High Distinction',
     percentMarked:100,
     finished: true,
-    courseItems:null,
+    courseItems:[],
     courseItemsWeightingChecksum: 1
   };
 
