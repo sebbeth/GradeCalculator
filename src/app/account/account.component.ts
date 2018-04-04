@@ -25,6 +25,12 @@ export class AccountComponent implements OnInit {
   }
 
 
+  testHTTP() {
+    this.accountData.updateAccountToAPI()
+    .subscribe();
+
+  }
+
   getAccount(): void {
     this.accountData.getAccount()
         .subscribe(account => this.account = account);

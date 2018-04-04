@@ -24,7 +24,7 @@ while ($row = $stmt->fetch())
 
   $row['courseItems'] = array(); // Add a courseItems key to courses array.
 
-  $itemQuery = $pdo->prepare('SELECT course_items.id,course_items.title FROM course_items
+  $itemQuery = $pdo->prepare('SELECT course_items.id,course_items.title,course_items.weighting,course_items.possibleMark,course_items.minimumMark,course_items.type,course_items.markRecieved FROM course_items
   INNER JOIN courses_items_relation ON course_items.id = courses_items_relation.course_item_id
   INNER JOIN courses ON courses_items_relation.course_id = courses.id WHERE courses.id = :id');
   $itemQuery->execute(['id' => $row['id']]);
@@ -43,8 +43,7 @@ while ($row = $stmt->fetch())
 
   }
 
-  var_dump($output);
-  // Now get the courseItems
+  //var_dump($output);
 
     echo json_encode($output);
 

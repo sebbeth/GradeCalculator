@@ -13,11 +13,25 @@
     <div class="col-sm">
       <div class="card" style="padding:25px">
 
-        <div class="row">
+        <div class="row pb-3">
+          <div class="col-sm">
+          <h3>{{account.fullname}}</h3>
+        </div>
+          <h3>{{account.institutionName}}</h3>
+        </div>
+        <div class="row pb-3">
           <div class="col-sm">
             <div class="card bg-success text-center">
               <div class="card-body">
                 <h4 class="card-title">GPA</h4>
+                <h5 class="card-title">{{account.GPA}}</h5>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm">
+            <div class="card bg-success text-center">
+              <div class="card-body">
+                <h4 class="card-title">WAM</h4>
                 <h5 class="card-title">{{account.GPA}}</h5>
               </div>
             </div>
@@ -30,19 +44,11 @@
               </div>
             </div>
           </div>
-          <div class="col-sm">
-            <div class="card bg-success text-center">
-              <div class="card-body">
-
-              </div>
-            </div>
-          </div>
         </div>
 
         <div class="row">
           <div class="col-sm">
             <a href="">Edit</a>
-            <a href="">See more</a>
           </div>
         </div>
 

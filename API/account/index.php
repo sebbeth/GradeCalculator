@@ -10,7 +10,7 @@ $username = $_GET['user']; // Prepare query input
 $output = array();
 
 // Get the account data.
-$stmt = $pdo->prepare('SELECT username,fullname,unitsCompleted,GPA,program,email,institutions.institutionName FROM accounts
+$stmt = $pdo->prepare('SELECT accounts.id,username,fullname,unitsCompleted,GPA,program,email,institutions.institutionName FROM accounts
 INNER JOIN institutions ON accounts.institution_id =institutions.id WHERE username = :username');
 $stmt->execute(['username' => $username]);
 

@@ -104,14 +104,26 @@ export class AccountDataService {
 
   }
 
-  public updateAccountToAPI(): void {
+  public updateAccountToAPI(): Observable {
 
+    const options = {
+      headers: new HttpHeaders({
+    'Content-Type':  'application/json'})
+};
+
+    return this.http.post(apiRootURL + 'account/add/', '', options);
+/*
     const body = new HttpParams()
-      .set(`id`, '1')
+      .set(`id`, '2')
       .set(`fullname`, 'this is working');
-    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
 
-     this.http.post(apiRootURL + 'account/update/', body.toString(), { headers, observe: 'response' });
+      const formData = new FormData();
+
+      const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+
+     this.http.post(apiRootURL + 'account/update/', body.toString(), { headers });
+     //, observe: 'response'
+     */
 
   /*
     this.http.put(apiRootURL + 'account/update/', {
