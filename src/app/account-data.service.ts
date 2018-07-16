@@ -104,7 +104,8 @@ export class AccountDataService {
 
   }
 
-  public updateAccountToAPI(): Observable {
+
+  public updateAccountToAPI(): Observable<Object> {
 
     const options = {
       headers: new HttpHeaders({
